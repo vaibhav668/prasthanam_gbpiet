@@ -1,0 +1,14 @@
+.env
+/techtalk
+/server
+/uploads/
+/frontend/node_modules/
+/frontend/dist/
+.agent/
+cookie.txt
+cookies.txt
+test-ws.js
+test_auth.sh
+# /reports/public/
+/reports/bin/hugo*
+/reports/.hugo_build.lock
