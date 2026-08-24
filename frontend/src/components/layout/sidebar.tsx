@@ -90,13 +90,13 @@ export function Sidebar({
           collapsed ? 'justify-center' : 'gap-3',
         )}
       >
-        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-sm font-semibold text-primary-foreground shadow-sm">
-          T
+        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-sm font-black text-primary-foreground shadow-sm font-ginto-nord">
+          P
         </div>
         {!collapsed && (
           <div className="min-w-0">
-            <p className="text-sm font-semibold tracking-tight">Forge</p>
-            <p className="text-xs text-muted-foreground">Club workspace</p>
+            <p className="text-sm font-semibold tracking-tight">Prasthanam</p>
+            <p className="text-xs text-muted-foreground">Robotics Club GBPIET</p>
           </div>
         )}
       </div>

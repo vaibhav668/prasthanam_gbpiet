@@ -92,8 +92,8 @@ export function AppLayout({ children, className }: { children?: React.ReactNode;
 
           <TopNavbar.Brand className="min-w-0">
             <div className="hidden min-w-0 lg:block">
-              <p className="truncate text-sm font-semibold tracking-tight">Forge Workspace</p>
-              <p className="truncate text-xs text-muted-foreground">Forum, chat, and projects in one place</p>
+              <p className="truncate text-sm font-semibold tracking-tight">Prasthanam Robotics</p>
+              <p className="truncate text-xs text-muted-foreground">The Robotics Club of GBPIET</p>
             </div>
           </TopNavbar.Brand>
 
@@ -102,7 +102,7 @@ export function AppLayout({ children, className }: { children?: React.ReactNode;
           <TopNavbar.Content>
             <div className="relative">
               <TopNavbar.User 
-                name={user?.username || "User"} 
+                name={user?.username || "Member"} 
                 email={user?.email}
                 avatar={user?.avatar}
                 onClick={() => setUserDropdownOpen(!userDropdownOpen)}
@@ -120,10 +120,10 @@ export function AppLayout({ children, className }: { children?: React.ReactNode;
                     onClick={() => {
                       setUserDropdownOpen(false);
                       const users = [
-                        { id: 1, name: 'Rudra Joshi', username: 'rudraj', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80', bio: 'Founder & President @ Forge.', email: 'rudra@forge.club' },
-                        { id: 2, name: 'Arjun Mehta', username: 'arjunm', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80', bio: 'Vice President @ Forge.', email: 'arjun@forge.club' },
-                        { id: 3, name: 'Priya Sharma', username: 'priyasharma', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&auto=format&fit=crop&q=80', bio: 'Design Lead @ Forge.', email: 'priya@forge.club' },
-                        { id: 4, name: 'Karan Singh', username: 'karansingh', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop&q=80', bio: 'Tech Lead @ Forge.', email: 'karan@forge.club' },
+                        { id: 1, name: 'Vaibhav Pokhriyal', username: 'prasthanam_lead', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80', bio: 'Club President & Lead @ Prasthanam.', email: 'lead@prasthanam.gbpiet.ac.in' },
+                        { id: 2, name: 'Aditya Rawat', username: 'robowar_tech', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80', bio: 'Hardware & Combat Robotics Lead.', email: 'aditya@prasthanam.gbpiet.ac.in' },
+                        { id: 3, name: 'Neha Negi', username: 'drone_embedded', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&auto=format&fit=crop&q=80', bio: 'Autonomous Systems & Drone Lead.', email: 'neha@prasthanam.gbpiet.ac.in' },
+                        { id: 4, name: 'Siddharth Joshi', username: 'iot_automation', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop&q=80', bio: 'Embedded Firmware & IoT Lead.', email: 'siddharth@prasthanam.gbpiet.ac.in' },
                       ];
                       const nextUser = users.find(u => u.id !== user?.id) || users[0];
                       useAuthStore.getState().login(nextUser, 'mock-token');
@@ -157,9 +157,9 @@ export function AuthLayout({ children, className }: { children: React.ReactNode;
       <div className="w-full max-w-md">
         <div className="mb-6 flex flex-col items-center gap-4">
           <div className="flex h-16 w-16 items-center justify-center bg-white text-black shadow-lg">
-            <span className="text-3xl font-black select-none">T</span>
+            <span className="text-3xl font-black select-none font-ginto-nord">P</span>
           </div>
-          <span className="text-xl font-black tracking-tighter font-ginto-nord text-white uppercase">Forge</span>
+          <span className="text-xl font-black tracking-tighter font-ginto-nord text-white uppercase">Prasthanam</span>
         </div>
         {children}
       </div>

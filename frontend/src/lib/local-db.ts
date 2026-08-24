@@ -2,6 +2,7 @@ import {
   INITIAL_CLUB_CONFIG,
   INITIAL_TEAM,
   INITIAL_EVENTS,
+  INITIAL_ACHIEVEMENTS,
   INITIAL_ANNOUNCEMENTS,
   INITIAL_THREADS,
   INITIAL_CHATROOMS,
@@ -13,6 +14,7 @@ import type {
   TeamMember,
   Event,
   Announcement,
+  Achievement,
   Thread,
   Post,
   ThreadReaction,
@@ -23,15 +25,16 @@ import type {
 } from '../types/api'
 
 const STORAGE_KEYS = {
-  CLUB: 'forge_club_config',
-  TEAM: 'forge_team_members',
-  EVENTS: 'forge_events',
-  ANNOUNCEMENTS: 'forge_announcements',
-  THREADS: 'forge_threads',
-  CHATROOMS: 'forge_chatrooms',
-  CHAT_MESSAGES: 'forge_chat_messages',
-  USERS: 'forge_users',
-  CURRENT_USER: 'forge_current_user',
+  CLUB: 'prasthanam_club_config',
+  TEAM: 'prasthanam_team_members',
+  EVENTS: 'prasthanam_events',
+  ACHIEVEMENTS: 'prasthanam_achievements',
+  ANNOUNCEMENTS: 'prasthanam_announcements',
+  THREADS: 'prasthanam_threads',
+  CHATROOMS: 'prasthanam_chatrooms',
+  CHAT_MESSAGES: 'prasthanam_chat_messages',
+  USERS: 'prasthanam_users',
+  CURRENT_USER: 'prasthanam_current_user',
 }
 
 function loadFromStorage<T>(key: string, defaultValue: T): T {
@@ -58,7 +61,7 @@ function saveToStorage<T>(key: string, value: T): void {
 
 // Channel for cross-tab live updates
 export const broadcastChannel = typeof window !== 'undefined' && 'BroadcastChannel' in window
-  ? new BroadcastChannel('forge_sync_channel')
+  ? new BroadcastChannel('prasthanam_sync_channel')
   : null
 
 export const localDb = {
@@ -72,6 +75,10 @@ export const localDb = {
 
   getEvents(): Event[] {
     return loadFromStorage<Event[]>(STORAGE_KEYS.EVENTS, INITIAL_EVENTS)
+  },
+
+  getAchievements(): Achievement[] {
+    return loadFromStorage<Achievement[]>(STORAGE_KEYS.ACHIEVEMENTS, INITIAL_ACHIEVEMENTS)
   },
 
   getAnnouncements(): Announcement[] {
@@ -94,8 +101,8 @@ export const localDb = {
       const newUser: User = {
         id: userId,
         username: updates.username || 'user',
-        email: updates.email || 'user@forge.club',
-        name: updates.name || 'User',
+        email: updates.email || 'member@prasthanam.gbpiet.ac.in',
+        name: updates.name || 'Member',
         bio: updates.bio || '',
         avatar: updates.avatar || '',
       }
@@ -113,6 +120,7 @@ export const localDb = {
     const club = this.getClubConfig()
     const team = this.getTeamMembers().filter((t) => t.is_active)
     const events = this.getEvents().filter((e) => e.status === 'upcoming' || e.status === 'ongoing')
+    const achievements = this.getAchievements()
     const announcements = this.getAnnouncements()
     const threads = this.getThreads()
     const chatrooms = this.getChatrooms()
@@ -122,9 +130,10 @@ export const localDb = {
       club,
       team,
       events,
+      achievements,
       announcements,
       stats: {
-        total_members: users.length + 42,
+        total_members: users.length + 50,
         total_threads: threads.length,
         total_chatrooms: chatrooms.length,
         total_events: events.length,
@@ -142,7 +151,6 @@ export const localDb = {
           t.posts?.some((p) => p.content.toLowerCase().includes(term))
       )
     }
-    // Sort descending by created_at
     return threads.sort(
       (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
     )
@@ -150,8 +158,7 @@ export const localDb = {
 
   getThreadById(id: number): Thread | null {
     const threads = this.getThreads()
-    const thread = threads.find((t) => t.id === id)
-    return thread || null
+    return threads.find((t) => t.id === id) || null
   },
 
   createThread(data: {

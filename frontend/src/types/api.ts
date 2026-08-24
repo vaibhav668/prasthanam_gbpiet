@@ -104,7 +104,7 @@ export interface ClubConfig {
   description: string
   logo_url: string
   hero_image_url: string
-  social_links: Record<string, string> | string // Map or JSON string
+  social_links: Record<string, string> | string
   founding_year: number
   contact_email: string
   created_at: string
@@ -117,7 +117,7 @@ export interface TeamMember {
   role: string
   bio: string
   avatar_url: string
-  social_links: Record<string, string> | string // Map or JSON string
+  social_links: Record<string, string> | string
   display_order: number
   is_active: boolean
   created_at: string
@@ -130,12 +130,24 @@ export interface Event {
   date: string
   end_date?: string
   location: string
-  event_type: 'workshop' | 'meetup' | 'hackathon' | 'talk'
+  event_type: 'workshop' | 'meetup' | 'hackathon' | 'talk' | 'competition'
   status: 'upcoming' | 'ongoing' | 'completed'
   image_url: string
   registration_link: string
   created_at: string
   updated_at: string
+}
+
+export interface Achievement {
+  id: number
+  title: string
+  competition: string
+  year: string
+  rank: string
+  category: string
+  description: string
+  image_url?: string
+  badge?: string
 }
 
 export interface Announcement {
@@ -162,6 +174,7 @@ export interface HomepageData {
   club: ClubConfig
   team: TeamMember[]
   events: Event[]
+  achievements: Achievement[]
   announcements: Announcement[]
   stats: HomepageStats
 }
@@ -179,4 +192,3 @@ export interface PaginatedResponse<T> {
   limit: number
   hasMore: boolean
 }
-

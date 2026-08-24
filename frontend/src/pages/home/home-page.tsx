@@ -1,5 +1,4 @@
 import { useState, useCallback, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import FancyCarousel from 'react-fancy-circular-carousel'
 import 'react-fancy-circular-carousel/FancyCarousel.css'
 import {
@@ -8,20 +7,22 @@ import {
   Clock3,
   ExternalLink,
   Hash,
-  MessageSquareText,
+  Trophy,
   Users,
   ChevronLeft,
   ChevronRight,
   Megaphone,
   Menu,
-  X
+  X,
+  Award,
+  Bot,
+  Zap
 } from 'lucide-react'
 import { format, formatDistanceToNow } from 'date-fns'
 import { useHomepage } from '../../hooks/use-homepage'
-import { useAuthStore } from '../../stores/auth-store'
 import { resolveAssetUrl } from '../../lib/utils'
 import { Avatar, AvatarImage, AvatarFallback, AvatarGroup } from '../../components/ui/avatar'
-import type { Announcement, Event, HomepageData, TeamMember } from '../../types/api'
+import type { Announcement, Event, Achievement, HomepageData, TeamMember } from '../../types/api'
 
 interface Report {
   title: string
@@ -43,15 +44,15 @@ function parseSocialLinks(raw?: string | Record<string, string>) {
 
 function socialLabel(platform: string) {
   const labels: Record<string, string> = {
-    github: 'GitHub', discord: 'Discord', twitter: 'X', instagram: 'Instagram', linkedin: 'LinkedIn', website: 'Website',
+    github: 'GitHub', discord: 'Discord', twitter: 'X', instagram: 'Instagram', linkedin: 'LinkedIn', youtube: 'YouTube', website: 'Website',
   }
   return labels[platform] || platform
 }
 
 function StatCard({ icon, label, value, helper }: { icon: React.ReactNode, label: string, value: string, helper: string }) {
   return (
-    <div className="bg-[#0A0A0A] p-6 rounded-none transition-colors hover:bg-[#111111] flex items-start gap-4">
-      <div className="flex h-12 w-12 shrink-0 items-center justify-center bg-black text-white rounded-full">
+    <div className="bg-[#0A0A0A] p-6 rounded-none transition-colors hover:bg-[#111111] flex items-start gap-4 border border-[#161616]">
+      <div className="flex h-12 w-12 shrink-0 items-center justify-center bg-black text-white rounded-full border border-[#222]">
         {icon}
       </div>
       <div className="space-y-1">
@@ -110,28 +111,27 @@ function TeamGrid({ team }: { team: TeamMember[] }) {
         </button>
 
         <div className="scale-[0.55] sm:scale-75 md:scale-100 origin-center flex items-center justify-center">
-
-        <FancyCarousel 
-          images={images}
-          setFocusElement={setFocusElement}
-          carouselRadius={180}
-          peripheralImageRadius={40}
-          centralImageRadius={70}
-          focusElementStyling={{border: 'none', boxShadow: '0 0 40px rgba(255,255,255,0.1)'}}
-          autoRotateTime={0}
-          transitionTime={0.8}
-        />
+          <FancyCarousel 
+            images={images}
+            setFocusElement={setFocusElement}
+            carouselRadius={180}
+            peripheralImageRadius={40}
+            centralImageRadius={70}
+            focusElementStyling={{border: 'none', boxShadow: '0 0 40px rgba(255,255,255,0.1)'}}
+            autoRotateTime={0}
+            transitionTime={0.8}
+          />
         </div>
       </div>
 
       <div className="w-full md:w-1/2">
         {activeMember && (
-          <div className="bg-[#0A0A0A] p-10 transition-all duration-300 shadow-2xl">
+          <div className="bg-[#0A0A0A] p-10 transition-all duration-300 shadow-2xl border border-[#161616]">
             <div className="flex flex-col gap-6">
-              <div className="flex items-center gap-6 pb-6">
-                <Avatar className="size-20 rounded-none bg-black">
+              <div className="flex items-center gap-6 pb-6 border-b border-[#1a1a1a]">
+                <Avatar className="size-20 rounded-none bg-black border border-[#222]">
                   <AvatarImage src={resolveAssetUrl(activeMember.avatar_url)} alt={activeMember.name} />
-                  <AvatarFallback className="rounded-none bg-black text-white">{activeMember.name.charAt(0).toUpperCase()}</AvatarFallback>
+                  <AvatarFallback className="rounded-none bg-black text-white font-black">{activeMember.name.charAt(0).toUpperCase()}</AvatarFallback>
                 </Avatar>
                 <div>
                   <h3 className="text-3xl font-black font-ginto-nord uppercase tracking-tight text-white">{activeMember.name}</h3>
@@ -142,14 +142,14 @@ function TeamGrid({ team }: { team: TeamMember[] }) {
                 {activeMember.bio}
               </p>
               {Object.entries(socials).length > 0 && (
-                <div className="mt-8 flex flex-wrap items-center gap-4">
+                <div className="mt-6 flex flex-wrap items-center gap-4">
                   {Object.entries(socials).map(([platform, url]) => (
                     <a
                       key={platform}
                       href={url as string}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 bg-[#111111] px-5 py-2.5 text-sm font-medium text-white transition-all hover:bg-white hover:text-black"
+                      className="inline-flex items-center gap-2 bg-[#111111] px-5 py-2.5 text-sm font-medium text-white transition-all hover:bg-white hover:text-black border border-[#222]"
                     >
                       <span>{socialLabel(platform)}</span>
                       <ExternalLink className="h-4 w-4" />
@@ -171,8 +171,8 @@ function EventList({ events }: { events: Event[] }) {
       {events.slice(0, 4).map((event) => {
         const eventDate = new Date(event.date)
         return (
-          <div key={event.id} className="bg-[#0A0A0A] p-6 hover:bg-[#111111] transition-colors flex flex-col md:flex-row gap-6">
-            <div className="flex h-20 w-20 shrink-0 flex-col items-center justify-center bg-black text-center">
+          <div key={event.id} className="bg-[#0A0A0A] p-6 hover:bg-[#111111] transition-colors flex flex-col md:flex-row gap-6 border border-[#161616]">
+            <div className="flex h-20 w-20 shrink-0 flex-col items-center justify-center bg-black text-center border border-[#222]">
               <span className="text-3xl font-black font-ginto-nord leading-none text-white">{format(eventDate, 'd')}</span>
               <span className="mt-2 text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500">
                 {format(eventDate, 'MMM')}
@@ -180,7 +180,7 @@ function EventList({ events }: { events: Event[] }) {
             </div>
             <div className="min-w-0 flex-1">
               <div className="flex flex-wrap items-center gap-3">
-                <span className="bg-[#111111] px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-white">
+                <span className="bg-[#111111] px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-white border border-[#222]">
                   {event.event_type}
                 </span>
                 <span className="bg-white px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-black">
@@ -213,11 +213,55 @@ function EventList({ events }: { events: Event[] }) {
   )
 }
 
+function AchievementsList({ achievements }: { achievements: Achievement[] }) {
+  if (!achievements || achievements.length === 0) return null
+
+  return (
+    <div className="grid gap-6 md:grid-cols-2">
+      {achievements.map((item) => (
+        <div
+          key={item.id}
+          className="bg-[#0A0A0A] p-8 hover:bg-[#111111] transition-all border border-[#161616] flex flex-col justify-between group"
+        >
+          <div className="space-y-4">
+            <div className="flex items-center justify-between gap-4">
+              <span className="bg-white text-black px-3 py-1 text-[11px] font-black uppercase tracking-wider">
+                {item.rank}
+              </span>
+              <span className="text-xs font-bold uppercase tracking-widest text-neutral-500">
+                {item.year}
+              </span>
+            </div>
+            <div>
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500 block mb-1">
+                {item.category}
+              </span>
+              <h3 className="text-2xl font-black font-ginto-nord tracking-tight text-white uppercase group-hover:text-neutral-100">
+                {item.title}
+              </h3>
+              <p className="mt-1 text-sm font-semibold text-neutral-400">{item.competition}</p>
+              <p className="mt-3 text-base leading-relaxed text-neutral-400">{item.description}</p>
+            </div>
+          </div>
+          {item.badge && (
+            <div className="mt-6 pt-4 border-t border-[#1a1a1a] flex items-center justify-between">
+              <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-neutral-400">
+                <Trophy className="h-4 w-4 text-white" />
+                {item.badge}
+              </span>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  )
+}
+
 function AnnouncementList({ announcements }: { announcements: Announcement[] }) {
   return (
     <div className="space-y-4">
       {announcements.slice(0, 4).map((announcement) => (
-        <div key={announcement.id} className="bg-[#0A0A0A] p-8 hover:bg-[#111111] transition-colors">
+        <div key={announcement.id} className="bg-[#0A0A0A] p-8 hover:bg-[#111111] transition-colors border border-[#161616]">
           <div className="flex items-start justify-between gap-4">
             <div className="space-y-4">
               <div className="flex flex-wrap items-center gap-3">
@@ -226,7 +270,7 @@ function AnnouncementList({ announcements }: { announcements: Announcement[] }) 
                     Pinned
                   </span>
                 )}
-                <span className="bg-[#111111] text-white px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em]">
+                <span className="bg-[#111111] text-white px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] border border-[#222]">
                   {announcement.priority}
                 </span>
               </div>
@@ -243,7 +287,7 @@ function AnnouncementList({ announcements }: { announcements: Announcement[] }) 
           <div className="mt-6 flex flex-wrap items-center gap-5 text-sm text-neutral-500">
             <span className="inline-flex items-center gap-2">
               <Users className="h-4 w-4" />
-              {announcement.author?.username || 'Club team'}
+              {announcement.author?.name || announcement.author?.username || 'Prasthanam Core'}
             </span>
             <span className="inline-flex items-center gap-2">
               <Clock3 className="h-4 w-4" />
@@ -277,7 +321,7 @@ function ReportsList() {
   return (
     <div className="space-y-4">
       {reports.slice(0, 3).map((report) => (
-        <div key={report.slug} className="bg-[#0A0A0A] p-6 hover:bg-[#111111] transition-colors flex flex-col md:flex-row gap-6">
+        <div key={report.slug} className="bg-[#0A0A0A] p-6 hover:bg-[#111111] transition-colors flex flex-col md:flex-row gap-6 border border-[#161616]">
           <div className="min-w-0 flex-1">
             <h3 className="text-xl font-bold font-ginto-nord tracking-tight text-white">{report.title}</h3>
             <div className="mt-2 text-sm text-neutral-500 font-bold uppercase tracking-widest">
@@ -291,7 +335,7 @@ function ReportsList() {
         </div>
       ))}
       <div className="pt-4">
-        <a href="/reports/events/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center w-full bg-[#111111] text-white px-6 py-4 font-bold uppercase tracking-widest text-sm hover:bg-white hover:text-black transition-colors">
+        <a href="/reports/events/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center w-full bg-[#111111] text-white px-6 py-4 font-bold uppercase tracking-widest text-sm hover:bg-white hover:text-black transition-colors border border-[#222]">
           View All Past Events
         </a>
       </div>
@@ -299,30 +343,29 @@ function ReportsList() {
   )
 }
 
-function HomeShell({ data, isAuthenticated }: { data: HomepageData; isAuthenticated: boolean }) {
+function HomeShell({ data }: { data: HomepageData }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
     <div className="min-h-screen bg-black text-white selection:bg-white selection:text-black font-sans overflow-x-hidden" style={{ WebkitTapHighlightColor: 'transparent' }}>
       {/* Ultra Minimal Navbar */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md">
-        <div className="mx-auto max-w-7xl px-6 py-6 lg:px-10 flex items-center justify-between">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-[#1a1a1a]">
+        <div className="mx-auto max-w-7xl px-6 py-5 lg:px-10 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <div className="flex h-10 w-10 items-center justify-center bg-white">
-              <span className="text-xl font-black text-black select-none">T</span>
+            <div className="flex h-10 w-10 items-center justify-center bg-white shadow-sm">
+              <span className="text-xl font-black text-black select-none font-ginto-nord">P</span>
             </div>
             <div>
               <p className="text-base font-extrabold font-ginto-nord uppercase tracking-tight text-white">{data.club.name}</p>
+              <p className="text-[10px] uppercase font-bold tracking-widest text-neutral-400">Robotics Club • GBPIET</p>
             </div>
           </div>
           <div className="hidden items-center gap-8 md:flex">
             <a href="#team" className="text-sm font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Team</a>
             <a href="#events" className="text-sm font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Events</a>
+            <a href="#achievements" className="text-sm font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Achievements</a>
             <a href="#reports" className="text-sm font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Reports</a>
             <a href="#updates" className="text-sm font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Updates</a>
-            <Link to="/app/forum" className="text-sm font-bold uppercase tracking-widest bg-white text-black px-6 py-3 hover:bg-neutral-200 transition-colors">
-              Workspace
-            </Link>
           </div>
           <div className="md:hidden">
             <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="text-white p-2">
@@ -335,11 +378,9 @@ function HomeShell({ data, isAuthenticated }: { data: HomepageData; isAuthentica
           <div className="md:hidden bg-black/95 backdrop-blur-md px-6 py-6 flex flex-col gap-6 border-t border-neutral-900 absolute top-full left-0 right-0 shadow-2xl z-50">
             <a href="#team" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Team</a>
             <a href="#events" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Events</a>
+            <a href="#achievements" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Achievements</a>
             <a href="#reports" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Reports</a>
             <a href="#updates" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Updates</a>
-            <Link to="/app/forum" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold uppercase tracking-widest bg-white text-black px-6 py-4 hover:bg-neutral-200 transition-colors text-center mt-4">
-              Workspace
-            </Link>
           </div>
         )}
       </header>
@@ -349,69 +390,79 @@ function HomeShell({ data, isAuthenticated }: { data: HomepageData; isAuthentica
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <section className="grid gap-16 lg:grid-cols-[1fr_500px] items-center">
             <div className="max-w-3xl text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#111] border border-[#222] text-[11px] font-bold uppercase tracking-widest text-neutral-400 mb-6">
+                <Bot className="w-3.5 h-3.5 text-white" /> GBPIET Official Robotics Chapter
+              </div>
               <h1 className="text-5xl font-black font-ginto-nord uppercase tracking-tighter text-white sm:text-7xl lg:text-8xl leading-[0.9]">
-                IMAGINE<br className="hidden sm:block" /> A PLACE.
+                BUILD. CODE.<br className="hidden sm:block" /> COMPETE.
               </h1>
               <p className="mt-8 max-w-xl mx-auto lg:mx-0 text-lg sm:text-xl leading-relaxed text-neutral-400">
                 {data.club.description}
               </p>
-              <div className="mt-12 flex flex-col gap-4 sm:flex-row">
-                <Link to="/app/forum" className="inline-flex justify-center items-center h-14 bg-white text-black px-10 font-bold uppercase tracking-widest hover:bg-neutral-200 transition-colors">
-                  Go to workspace
+              <div className="mt-12 flex flex-col gap-4 sm:flex-row justify-center lg:justify-start">
+                <a href="#achievements" className="inline-flex justify-center items-center h-14 bg-white text-black px-10 font-bold uppercase tracking-widest hover:bg-neutral-200 transition-colors">
+                  Explore Achievements
                   <ArrowRight className="ml-3 h-5 w-5" />
-                </Link>
+                </a>
+                <a href="#events" className="inline-flex justify-center items-center h-14 bg-[#111] text-white px-8 font-bold uppercase tracking-widest hover:bg-[#1a1a1a] transition-colors border border-[#222]">
+                  Upcoming Events
+                </a>
               </div>
             </div>
 
-            {/* Stark Minimal Client Mockup */}
+            {/* Stark Minimal Robotics Telemetry Mockup */}
             <div className="relative w-full max-w-lg mx-auto lg:mx-0">
-              <div className="w-full bg-[#0A0A0A] overflow-hidden flex flex-col h-[450px] shadow-2xl">
+              <div className="w-full bg-[#0A0A0A] overflow-hidden flex flex-col h-[450px] shadow-2xl border border-[#222]">
                 {/* Top window bar */}
-                <div className="h-12 bg-black flex items-center px-6 justify-between">
+                <div className="h-12 bg-black flex items-center px-6 justify-between border-b border-[#1a1a1a]">
                   <div className="flex gap-2">
                     <span className="w-2.5 h-2.5 bg-neutral-700" />
                     <span className="w-2.5 h-2.5 bg-neutral-700" />
                     <span className="w-2.5 h-2.5 bg-neutral-700" />
                   </div>
-                  <span className="text-[10px] font-bold text-neutral-500 uppercase tracking-widest">forge.exe</span>
+                  <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest">prasthanam.bot // telemetry</span>
                   <div className="w-10" />
                 </div>
                 
-                {/* Client workspace panels */}
+                {/* Robot Subsystems & Log View */}
                 <div className="flex flex-1 overflow-hidden">
-                  <div className="hidden sm:flex w-40 bg-[#050505] p-4 flex-col gap-2">
-                    <span className="text-[9px] font-bold text-neutral-600 uppercase tracking-widest mb-2">channels</span>
+                  <div className="hidden sm:flex w-40 bg-[#050505] p-4 flex-col gap-2 border-r border-[#1a1a1a]">
+                    <span className="text-[9px] font-bold text-neutral-600 uppercase tracking-widest mb-2">subsystems</span>
                     <div className="flex items-center gap-2 px-3 py-2 bg-[#111111] text-white text-xs font-bold uppercase tracking-wider">
-                      <span>#</span> general
+                      <span>#</span> combat-bot
                     </div>
                     <div className="flex items-center gap-2 px-3 py-2 text-neutral-500 hover:text-white text-xs font-bold uppercase tracking-wider">
-                      <span>#</span> showcase
+                      <span>#</span> autonomous
+                    </div>
+                    <div className="flex items-center gap-2 px-3 py-2 text-neutral-500 hover:text-white text-xs font-bold uppercase tracking-wider">
+                      <span>#</span> drones
                     </div>
                   </div>
 
-                  <div className="flex-1 bg-[#0A0A0A] p-6 flex flex-col justify-end gap-6">
+                  <div className="flex-1 bg-[#0A0A0A] p-6 flex flex-col justify-end gap-5">
                     <div className="flex gap-4 items-start">
-                      <div className="w-10 h-10 bg-white flex items-center justify-center text-xs font-black text-black">SYS</div>
+                      <div className="w-10 h-10 bg-white flex items-center justify-center text-xs font-black text-black shrink-0">ROS</div>
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="text-xs font-black text-white uppercase tracking-wider">System</span>
+                          <span className="text-xs font-black text-white uppercase tracking-wider">ROS2 Core Node</span>
                         </div>
-                        <p className="text-sm text-neutral-400 mt-1 leading-relaxed">Welcome. Start coding together.</p>
+                        <p className="text-sm text-neutral-400 mt-1 leading-relaxed">LiDAR PointCloud Online // Waypoints Initialized</p>
                       </div>
                     </div>
                     
                     <div className="flex gap-4 items-start">
-                      <div className="w-10 h-10 bg-[#111111] flex items-center justify-center text-xs font-black text-white">U</div>
+                      <div className="w-10 h-10 bg-[#111111] border border-[#333] flex items-center justify-center text-xs font-black text-white shrink-0">ESC</div>
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="text-xs font-black text-white uppercase tracking-wider">User</span>
+                          <span className="text-xs font-black text-white uppercase tracking-wider">Vajra Combat Unit</span>
                         </div>
-                        <p className="text-sm text-neutral-400 mt-1 leading-relaxed">Hello team. Ready to build.</p>
+                        <p className="text-sm text-neutral-400 mt-1 leading-relaxed">Dual 60A Brushless ESC Armed // 12,000 RPM</p>
                       </div>
                     </div>
 
-                    <div className="h-12 bg-black flex items-center px-4 mt-4">
-                      <span className="text-xs text-neutral-600 font-bold uppercase tracking-widest">Message #general</span>
+                    <div className="h-12 bg-black flex items-center px-4 mt-2 border border-[#1a1a1a] justify-between">
+                      <span className="text-xs text-neutral-500 font-bold uppercase tracking-widest">STATUS: SYSTEM READY</span>
+                      <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
                     </div>
                   </div>
                 </div>
@@ -422,79 +473,98 @@ function HomeShell({ data, isAuthenticated }: { data: HomepageData; isAuthentica
       </div>
 
       <main className="mx-auto max-w-7xl space-y-32 px-6 py-20 lg:px-10">
+        {/* Stats Grid */}
         <section className="grid gap-1 md:grid-cols-2 xl:grid-cols-4 bg-black">
-          <StatCard icon={<Users className="h-5 w-5" />} label="Members" value={String(data.stats.total_members)} helper="and counting" />
-          <StatCard icon={<MessageSquareText className="h-5 w-5" />} label="Threads" value={String(data.stats.total_threads)} helper="across the forum" />
-          <StatCard icon={<CalendarDays className="h-5 w-5" />} label="Events" value={String(data.stats.total_events)} helper="this semester" />
-          <StatCard icon={<Hash className="h-5 w-5" />} label="Channels" value={String(data.stats.total_chatrooms)} helper="for everything" />
+          <StatCard icon={<Bot className="h-5 w-5" />} label="Robots Built" value="15+" helper="combat, UAVs & rovers" />
+          <StatCard icon={<Users className="h-5 w-5" />} label="Club Members" value={String(data.stats.total_members)} helper="engineers & builders" />
+          <StatCard icon={<Trophy className="h-5 w-5" />} label="Trophies & Wins" value={String(data.achievements?.length || 6)} helper="national & state awards" />
+          <StatCard icon={<CalendarDays className="h-5 w-5" />} label="Bootcamps & Fests" value={String(data.stats.total_events)} helper="annual technical clashes" />
         </section>
 
-        <section className="bg-[#0A0A0A] p-12 md:p-16 flex flex-col md:flex-row items-center gap-16">
+        {/* Club Mission Banner */}
+        <section className="bg-[#0A0A0A] p-12 md:p-16 flex flex-col md:flex-row items-center gap-16 border border-[#161616]">
           <div className="flex-1 space-y-6">
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500 block">What's inside</span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500 block">About The Club</span>
             <h2 className="text-3xl md:text-5xl font-black font-ginto-nord uppercase text-white tracking-tighter leading-none">
-              One place for all of it.
+              Engineering autonomous intelligence & hardware power.
             </h2>
             <p className="text-neutral-400 text-base md:text-lg leading-relaxed max-w-xl">
-              Chat, forums, event pages, and announcements. No switching tabs, no digging through group chats.
+              From designing custom PCBs and machining combat chassis to programming autonomous computer vision algorithms, Prasthanam pushes the boundaries of collegiate robotics at GBPIET.
             </p>
           </div>
-          <div className="w-full md:w-96 bg-black p-8">
-            <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500 mb-6">Core Status</h4>
+          <div className="w-full md:w-96 bg-black p-8 border border-[#222]">
+            <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500 mb-6">Core Leadership</h4>
             <div className="flex items-center justify-between gap-4">
               <AvatarGroup>
                 {data.team.slice(0, 4).map((member) => (
-                  <Avatar key={member.id} className="size-12 bg-[#111]">
+                  <Avatar key={member.id} className="size-12 bg-[#111] border border-[#222]">
                     <AvatarImage src={resolveAssetUrl(member.avatar_url)} alt={member.name} />
-                    <AvatarFallback className="bg-[#111] text-white">{member.name.charAt(0).toUpperCase()}</AvatarFallback>
+                    <AvatarFallback className="bg-[#111] text-white font-bold">{member.name.charAt(0).toUpperCase()}</AvatarFallback>
                   </Avatar>
                 ))}
               </AvatarGroup>
               <span className="text-xs font-black text-black bg-white px-3 py-1.5 uppercase tracking-widest">
-                {data.team.length} Active
+                {data.team.length} Leads
               </span>
             </div>
           </div>
         </section>
 
+        {/* Team Section */}
         <section id="team" className="space-y-12 scroll-mt-32">
           <div className="space-y-4 max-w-2xl">
             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500 block">Leadership</span>
-            <h2 className="text-5xl font-black font-ginto-nord uppercase tracking-tighter text-white">Organizers</h2>
+            <h2 className="text-5xl font-black font-ginto-nord uppercase tracking-tighter text-white">The Robotics Core</h2>
           </div>
           <TeamGrid team={data.team} />
         </section>
 
+        {/* Events Section */}
         <section id="events" className="grid gap-12 lg:grid-cols-[300px_minmax(0,1fr)] scroll-mt-32">
           <div className="space-y-4">
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500 block">Events</span>
-            <h2 className="text-5xl font-black font-ginto-nord uppercase tracking-tighter text-white">Actions</h2>
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500 block">Competitions & Camps</span>
+            <h2 className="text-5xl font-black font-ginto-nord uppercase tracking-tighter text-white">Events</h2>
           </div>
           <EventList events={data.events} />
         </section>
 
+        {/* Achievements Section */}
+        <section id="achievements" className="space-y-12 scroll-mt-32">
+          <div className="space-y-4 max-w-2xl">
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500 block">Hall of Fame</span>
+            <h2 className="text-5xl font-black font-ginto-nord uppercase tracking-tighter text-white">Achievements & Wins</h2>
+            <p className="text-neutral-400 text-base">
+              National robotics championships, track record timings, and innovation honors won by the Prasthanam team.
+            </p>
+          </div>
+          <AchievementsList achievements={data.achievements || []} />
+        </section>
+
+        {/* Reports Section */}
         <section id="reports" className="grid gap-12 lg:grid-cols-[300px_minmax(0,1fr)] scroll-mt-32">
           <div className="space-y-4">
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500 block">Reports</span>
-            <h2 className="text-5xl font-black font-ginto-nord uppercase tracking-tighter text-white">Past Events</h2>
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500 block">Documentation</span>
+            <h2 className="text-5xl font-black font-ginto-nord uppercase tracking-tighter text-white">Event Reports</h2>
           </div>
           <ReportsList />
         </section>
 
+        {/* Bulletins & Updates Section */}
         <section id="updates" className="grid gap-12 lg:grid-cols-[300px_minmax(0,1fr)] scroll-mt-32">
           <div className="space-y-4">
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500 block">Updates</span>
-            <h2 className="text-5xl font-black font-ginto-nord uppercase tracking-tighter text-white">Bulletin</h2>
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500 block">Notices</span>
+            <h2 className="text-5xl font-black font-ginto-nord uppercase tracking-tighter text-white">Club Bulletin</h2>
           </div>
           <AnnouncementList announcements={data.announcements} />
         </section>
       </main>
 
-      <footer className="bg-[#0A0A0A] mt-20">
+      {/* Footer */}
+      <footer className="bg-[#0A0A0A] mt-20 border-t border-[#1a1a1a]">
         <div className="mx-auto flex max-w-7xl flex-col gap-8 px-6 py-16 lg:flex-row lg:items-center lg:justify-between lg:px-10">
           <div className="flex items-center gap-6">
-            <div className="flex h-16 w-16 items-center justify-center bg-white text-black">
-              <span className="text-3xl font-black select-none">T</span>
+            <div className="flex h-16 w-16 items-center justify-center bg-white text-black font-ginto-nord shadow-sm">
+              <span className="text-3xl font-black select-none">P</span>
             </div>
             <div>
               <p className="text-2xl font-black font-ginto-nord uppercase tracking-tighter text-white">{data.club.name}</p>
@@ -502,12 +572,12 @@ function HomeShell({ data, isAuthenticated }: { data: HomepageData; isAuthentica
             </div>
           </div>
           <div className="flex flex-col gap-4 sm:flex-row">
-            <a href={`mailto:${data.club.contact_email}`} className="bg-[#111111] text-white px-8 py-4 font-bold uppercase tracking-widest text-sm hover:bg-neutral-800 transition-colors text-center">
-              Contact
+            <a href={`mailto:${data.club.contact_email}`} className="bg-[#111111] text-white px-8 py-4 font-bold uppercase tracking-widest text-sm hover:bg-neutral-800 transition-colors text-center border border-[#222]">
+              Contact Club
             </a>
-            <Link to="/app/forum" className="bg-white text-black px-8 py-4 font-bold uppercase tracking-widest text-sm hover:bg-neutral-200 transition-colors text-center">
-              Open Workspace
-            </Link>
+            <a href="#achievements" className="bg-white text-black px-8 py-4 font-bold uppercase tracking-widest text-sm hover:bg-neutral-200 transition-colors text-center">
+              View Achievements
+            </a>
           </div>
         </div>
       </footer>
@@ -518,11 +588,11 @@ function HomeShell({ data, isAuthenticated }: { data: HomepageData; isAuthentica
 function LoadingState() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-black px-6">
-      <div className="w-full max-w-md bg-[#0A0A0A] p-12 text-center flex flex-col items-center gap-6">
+      <div className="w-full max-w-md bg-[#0A0A0A] p-12 text-center flex flex-col items-center gap-6 border border-[#222]">
         <div className="h-12 w-12 animate-spin rounded-full border-4 border-neutral-800 border-t-white" />
         <div className="space-y-2">
           <h2 className="text-xl font-black font-ginto-nord tracking-tighter text-white uppercase">Loading</h2>
-          <p className="text-sm text-neutral-500 uppercase tracking-widest">Pulling data</p>
+          <p className="text-sm text-neutral-500 uppercase tracking-widest">Pulling Prasthanam data</p>
         </div>
       </div>
     </div>
@@ -532,13 +602,13 @@ function LoadingState() {
 function ErrorState() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-black px-6">
-      <div className="w-full max-w-lg bg-[#0A0A0A] p-12 text-center">
-        <div className="mx-auto flex h-16 w-16 items-center justify-center bg-[#111111] text-white mb-6">
+      <div className="w-full max-w-lg bg-[#0A0A0A] p-12 text-center border border-[#222]">
+        <div className="mx-auto flex h-16 w-16 items-center justify-center bg-[#111111] text-white mb-6 border border-[#222]">
           <Megaphone className="h-6 w-6" />
         </div>
         <h2 className="text-3xl font-black font-ginto-nord tracking-tighter text-white uppercase">Unavailable</h2>
         <p className="mt-4 text-base text-neutral-500">
-          The workspace data could not be loaded.
+          The club data could not be loaded.
         </p>
       </div>
     </div>
@@ -547,10 +617,9 @@ function ErrorState() {
 
 export function HomePage() {
   const { data, isLoading, error } = useHomepage()
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
 
   if (isLoading) return <LoadingState />
   if (error || !data) return <ErrorState />
 
-  return <HomeShell data={data} isAuthenticated={isAuthenticated} />
+  return <HomeShell data={data} />
 }
