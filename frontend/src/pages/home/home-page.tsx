@@ -386,87 +386,26 @@ function HomeShell({ data }: { data: HomepageData }) {
       </header>
 
       {/* Hero Section */}
-      <div className="relative pt-32 pb-20">
+      <div className="relative pt-36 pb-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <section className="grid gap-16 lg:grid-cols-[1fr_500px] items-center">
-            <div className="max-w-3xl text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#111] border border-[#222] text-[11px] font-bold uppercase tracking-widest text-neutral-400 mb-6">
-                <Bot className="w-3.5 h-3.5 text-white" /> GBPIET Official Robotics Chapter
-              </div>
-              <h1 className="text-5xl font-black font-ginto-nord uppercase tracking-tighter text-white sm:text-7xl lg:text-8xl leading-[0.9]">
-                BUILD. CODE.<br className="hidden sm:block" /> COMPETE.
-              </h1>
-              <p className="mt-8 max-w-xl mx-auto lg:mx-0 text-lg sm:text-xl leading-relaxed text-neutral-400">
-                {data.club.description}
-              </p>
-              <div className="mt-12 flex flex-col gap-4 sm:flex-row justify-center lg:justify-start">
-                <a href="#achievements" className="inline-flex justify-center items-center h-14 bg-white text-black px-10 font-bold uppercase tracking-widest hover:bg-neutral-200 transition-colors">
-                  Explore Achievements
-                  <ArrowRight className="ml-3 h-5 w-5" />
-                </a>
-                <a href="#events" className="inline-flex justify-center items-center h-14 bg-[#111] text-white px-8 font-bold uppercase tracking-widest hover:bg-[#1a1a1a] transition-colors border border-[#222]">
-                  Upcoming Events
-                </a>
-              </div>
+          <section className="max-w-4xl text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#111] border border-[#222] text-[11px] font-bold uppercase tracking-widest text-neutral-400 mb-8">
+              <Bot className="w-3.5 h-3.5 text-white" /> GBPIET Official Robotics Chapter
             </div>
-
-            {/* Stark Minimal Robotics Telemetry Mockup */}
-            <div className="relative w-full max-w-lg mx-auto lg:mx-0">
-              <div className="w-full bg-[#0A0A0A] overflow-hidden flex flex-col h-[450px] shadow-2xl border border-[#222]">
-                {/* Top window bar */}
-                <div className="h-12 bg-black flex items-center px-6 justify-between border-b border-[#1a1a1a]">
-                  <div className="flex gap-2">
-                    <span className="w-2.5 h-2.5 bg-neutral-700" />
-                    <span className="w-2.5 h-2.5 bg-neutral-700" />
-                    <span className="w-2.5 h-2.5 bg-neutral-700" />
-                  </div>
-                  <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest">prasthanam.bot // telemetry</span>
-                  <div className="w-10" />
-                </div>
-                
-                {/* Robot Subsystems & Log View */}
-                <div className="flex flex-1 overflow-hidden">
-                  <div className="hidden sm:flex w-40 bg-[#050505] p-4 flex-col gap-2 border-r border-[#1a1a1a]">
-                    <span className="text-[9px] font-bold text-neutral-600 uppercase tracking-widest mb-2">subsystems</span>
-                    <div className="flex items-center gap-2 px-3 py-2 bg-[#111111] text-white text-xs font-bold uppercase tracking-wider">
-                      <span>#</span> combat-bot
-                    </div>
-                    <div className="flex items-center gap-2 px-3 py-2 text-neutral-500 hover:text-white text-xs font-bold uppercase tracking-wider">
-                      <span>#</span> autonomous
-                    </div>
-                    <div className="flex items-center gap-2 px-3 py-2 text-neutral-500 hover:text-white text-xs font-bold uppercase tracking-wider">
-                      <span>#</span> drones
-                    </div>
-                  </div>
-
-                  <div className="flex-1 bg-[#0A0A0A] p-6 flex flex-col justify-end gap-5">
-                    <div className="flex gap-4 items-start">
-                      <div className="w-10 h-10 bg-white flex items-center justify-center text-xs font-black text-black shrink-0">ROS</div>
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <span className="text-xs font-black text-white uppercase tracking-wider">ROS2 Core Node</span>
-                        </div>
-                        <p className="text-sm text-neutral-400 mt-1 leading-relaxed">LiDAR PointCloud Online // Waypoints Initialized</p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex gap-4 items-start">
-                      <div className="w-10 h-10 bg-[#111111] border border-[#333] flex items-center justify-center text-xs font-black text-white shrink-0">ESC</div>
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <span className="text-xs font-black text-white uppercase tracking-wider">Vajra Combat Unit</span>
-                        </div>
-                        <p className="text-sm text-neutral-400 mt-1 leading-relaxed">Dual 60A Brushless ESC Armed // 12,000 RPM</p>
-                      </div>
-                    </div>
-
-                    <div className="h-12 bg-black flex items-center px-4 mt-2 border border-[#1a1a1a] justify-between">
-                      <span className="text-xs text-neutral-500 font-bold uppercase tracking-widest">STATUS: SYSTEM READY</span>
-                      <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <h1 className="text-5xl font-black font-ginto-nord uppercase tracking-tighter text-white sm:text-7xl lg:text-8xl leading-[0.9]">
+              BUILD. CODE.<br className="hidden sm:block" /> COMPETE.
+            </h1>
+            <p className="mt-8 max-w-2xl text-lg sm:text-xl leading-relaxed text-neutral-400">
+              {data.club.description}
+            </p>
+            <div className="mt-12 flex flex-col gap-4 sm:flex-row justify-center lg:justify-start">
+              <a href="#achievements" className="inline-flex justify-center items-center h-14 bg-white text-black px-10 font-bold uppercase tracking-widest hover:bg-neutral-200 transition-colors">
+                Explore Achievements
+                <ArrowRight className="ml-3 h-5 w-5" />
+              </a>
+              <a href="#events" className="inline-flex justify-center items-center h-14 bg-[#111] text-white px-8 font-bold uppercase tracking-widest hover:bg-[#1a1a1a] transition-colors border border-[#222]">
+                Upcoming Events
+              </a>
             </div>
           </section>
         </div>
