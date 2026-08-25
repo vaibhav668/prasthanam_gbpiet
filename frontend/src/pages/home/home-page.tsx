@@ -14,9 +14,7 @@ import {
   Megaphone,
   Menu,
   X,
-  Award,
-  Bot,
-  Zap
+  Bot
 } from 'lucide-react'
 import { format, formatDistanceToNow } from 'date-fns'
 import { useHomepage } from '../../hooks/use-homepage'
@@ -65,7 +63,7 @@ function StatCard({ icon, label, value, helper }: { icon: React.ReactNode, label
 }
 
 function TeamGrid({ team }: { team: TeamMember[] }) {
-  const featured = team.slice(0, 6)
+  const featured = team
   const [focusElement, setFocusElement] = useState(0)
 
   if (!featured || featured.length === 0) {
@@ -115,8 +113,8 @@ function TeamGrid({ team }: { team: TeamMember[] }) {
             images={images}
             setFocusElement={setFocusElement}
             carouselRadius={180}
-            peripheralImageRadius={40}
-            centralImageRadius={70}
+            peripheralImageRadius={32}
+            centralImageRadius={65}
             focusElementStyling={{border: 'none', boxShadow: '0 0 40px rgba(255,255,255,0.1)'}}
             autoRotateTime={0}
             transitionTime={0.8}
@@ -373,7 +371,7 @@ function HomeShell({ data }: { data: HomepageData }) {
             </div>
           </div>
           <div className="hidden items-center gap-8 md:flex">
-            <a href="#team" className="text-sm font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Team</a>
+            <a href="#team" className="text-sm font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Members</a>
             <a href="#events" className="text-sm font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Events</a>
             <a href="#achievements" className="text-sm font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Achievements</a>
             <a href="#reports" className="text-sm font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Reports</a>
@@ -388,7 +386,7 @@ function HomeShell({ data }: { data: HomepageData }) {
         
         {mobileMenuOpen && (
           <div className="md:hidden bg-black/95 backdrop-blur-md px-6 py-6 flex flex-col gap-6 border-t border-neutral-900 absolute top-full left-0 right-0 shadow-2xl z-50">
-            <a href="#team" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Team</a>
+            <a href="#team" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Members</a>
             <a href="#events" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Events</a>
             <a href="#achievements" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Achievements</a>
             <a href="#reports" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Reports</a>
@@ -444,7 +442,7 @@ function HomeShell({ data }: { data: HomepageData }) {
             </p>
           </div>
           <div className="w-full md:w-96 bg-black p-8 border border-[#222]">
-            <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500 mb-6">Core Leadership</h4>
+            <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500 mb-6">Club Members</h4>
             <div className="flex items-center justify-between gap-4">
               <AvatarGroup>
                 {data.team.slice(0, 4).map((member) => (
@@ -455,7 +453,7 @@ function HomeShell({ data }: { data: HomepageData }) {
                 ))}
               </AvatarGroup>
               <span className="text-xs font-black text-black bg-white px-3 py-1.5 uppercase tracking-widest">
-                {data.team.length} Leads
+                {data.team.length} Members
               </span>
             </div>
           </div>
@@ -464,8 +462,7 @@ function HomeShell({ data }: { data: HomepageData }) {
         {/* Team Section */}
         <section id="team" className="space-y-12 scroll-mt-32">
           <div className="space-y-4 max-w-2xl">
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500 block">Leadership</span>
-            <h2 className="text-5xl font-black font-ginto-nord uppercase tracking-tighter text-white">The Robotics Core</h2>
+            <h2 className="text-5xl font-black font-ginto-nord uppercase tracking-tighter text-white">Club Members</h2>
           </div>
           <TeamGrid team={data.team} />
         </section>

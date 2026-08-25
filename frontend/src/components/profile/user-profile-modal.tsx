@@ -1,7 +1,6 @@
-import * as React from 'react'
 import { X } from 'lucide-react'
 import { Button } from '../ui/button'
-import { cn, resolveAssetUrl } from '../../lib/utils'
+import { resolveAssetUrl } from '../../lib/utils'
 import type { User } from '../../types/api'
 
 interface UserProfileModalProps {

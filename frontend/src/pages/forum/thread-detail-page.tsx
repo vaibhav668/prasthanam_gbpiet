@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react'
-import { useParams, Link, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import { useThread, useCreatePost, useAddReaction, useRemoveReaction } from '../../hooks/use-threads'
 import { useAuthStore } from '../../stores/auth-store'

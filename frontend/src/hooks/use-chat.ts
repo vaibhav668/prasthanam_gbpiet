@@ -1,7 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { chatService } from '../services/thread-service'
 import { queryKeys } from '../lib/query-provider'
-import type { Chatroom, ChatMessage } from '../types/api'
 
 export function useChatrooms() {
   return useQuery({

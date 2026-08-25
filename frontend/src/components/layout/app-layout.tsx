@@ -131,6 +131,15 @@ export function AppLayout({ children, className }: { children?: React.ReactNode;
                   >
                     Switch Profile
                   </button>
+                  <button 
+                    className="w-full text-left px-4 py-2 text-sm text-red-400 hover:text-red-300 hover:bg-[#222] font-semibold transition-colors" 
+                    onClick={() => {
+                      setUserDropdownOpen(false);
+                      handleLogout();
+                    }}
+                  >
+                    Sign Out
+                  </button>
                 </div>
               )}
             </div>
