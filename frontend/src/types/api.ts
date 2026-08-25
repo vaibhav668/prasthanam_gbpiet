@@ -159,6 +159,7 @@ export interface Announcement {
   author_id: number
   author: User
   expires_at?: string
+  registration_link?: string
   created_at: string
   updated_at: string
 }

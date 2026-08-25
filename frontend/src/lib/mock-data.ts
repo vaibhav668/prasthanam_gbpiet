@@ -298,11 +298,12 @@ export const INITIAL_ANNOUNCEMENTS: Announcement[] = [
   {
     id: 2,
     title: "Registrations Open for Robowars League '26",
-    content: "Team registrations for the 15kg lightweight and featherweight combat categories are now live. Register your team and submit your bot CAD specifications before the deadline.",
+    content: "Team registrations for the 15kg lightweight and featherweight combat categories are now live. Register your team and submit your bot CAD specifications before the deadline. Meet scheduled on: 23rd August, 25th August, 30th August, 6th September, 20th September, 29th September, 9th October.",
     priority: 'urgent',
     is_pinned: true,
     author_id: 2,
     author: INITIAL_USERS[1],
+    registration_link: 'https://prasthanam.gbpiet.ac.in/events/robowars-26',
     created_at: new Date(Date.now() - 1000 * 60 * 60 * 24 * 5).toISOString(),
     updated_at: new Date(Date.now() - 1000 * 60 * 60 * 24 * 5).toISOString(),
   },

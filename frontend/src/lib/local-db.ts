@@ -27,9 +27,9 @@ import type {
 const STORAGE_KEYS = {
   CLUB: 'prasthanam_club_config',
   TEAM: 'prasthanam_team_members',
-  EVENTS: 'prasthanam_events',
+  EVENTS: 'prasthanam_events_v2',
   ACHIEVEMENTS: 'prasthanam_achievements',
-  ANNOUNCEMENTS: 'prasthanam_announcements',
+  ANNOUNCEMENTS: 'prasthanam_announcements_v2',
   THREADS: 'prasthanam_threads',
   CHATROOMS: 'prasthanam_chatrooms',
   CHAT_MESSAGES: 'prasthanam_chat_messages',

@@ -189,20 +189,33 @@ function EventList({ events }: { events: Event[] }) {
               </div>
               <h3 className="mt-4 text-xl font-bold font-ginto-nord tracking-tight text-white">{event.title}</h3>
               <p className="mt-2 line-clamp-2 text-base leading-relaxed text-neutral-400">{event.description}</p>
-              <div className="mt-5 flex flex-wrap items-center gap-5 text-sm text-neutral-500">
-                <span className="inline-flex items-center gap-2">
-                  <CalendarDays className="h-4 w-4" />
-                  {format(eventDate, 'EEE, MMM d')}
-                </span>
-                <span className="inline-flex items-center gap-2">
-                  <Clock3 className="h-4 w-4" />
-                  {format(eventDate, 'h:mm a')}
-                </span>
-                {event.location && (
+              <div className="mt-5 flex flex-wrap items-center justify-between gap-5">
+                <div className="flex flex-wrap items-center gap-5 text-sm text-neutral-500">
                   <span className="inline-flex items-center gap-2">
-                    <Hash className="h-4 w-4" />
-                    {event.location}
+                    <CalendarDays className="h-4 w-4" />
+                    {format(eventDate, 'EEE, MMM d')}
                   </span>
+                  <span className="inline-flex items-center gap-2">
+                    <Clock3 className="h-4 w-4" />
+                    {format(eventDate, 'h:mm a')}
+                  </span>
+                  {event.location && (
+                    <span className="inline-flex items-center gap-2">
+                      <Hash className="h-4 w-4" />
+                      {event.location}
+                    </span>
+                  )}
+                </div>
+                {event.registration_link && (
+                  <a
+                    href={event.registration_link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-white text-black px-5 py-2 text-xs font-bold uppercase tracking-widest hover:bg-neutral-200 transition-colors border border-white"
+                  >
+                    <span>Register Now</span>
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
                 )}
               </div>
             </div>
@@ -264,16 +277,6 @@ function AnnouncementList({ announcements }: { announcements: Announcement[] }) 
         <div key={announcement.id} className="bg-[#0A0A0A] p-8 hover:bg-[#111111] transition-colors border border-[#161616]">
           <div className="flex items-start justify-between gap-4">
             <div className="space-y-4">
-              <div className="flex flex-wrap items-center gap-3">
-                {announcement.is_pinned && (
-                  <span className="bg-white text-black px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em]">
-                    Pinned
-                  </span>
-                )}
-                <span className="bg-[#111111] text-white px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] border border-[#222]">
-                  {announcement.priority}
-                </span>
-              </div>
               <div>
                 <h3 className="text-xl font-bold font-ginto-nord tracking-tight text-white">
                   {stripEmojis(announcement.title)}
@@ -284,15 +287,24 @@ function AnnouncementList({ announcements }: { announcements: Announcement[] }) 
               </div>
             </div>
           </div>
-          <div className="mt-6 flex flex-wrap items-center gap-5 text-sm text-neutral-500">
-            <span className="inline-flex items-center gap-2">
-              <Users className="h-4 w-4" />
-              {announcement.author?.name || announcement.author?.username || 'Prasthanam Core'}
-            </span>
-            <span className="inline-flex items-center gap-2">
-              <Clock3 className="h-4 w-4" />
-              {formatDistanceToNow(new Date(announcement.created_at), { addSuffix: true })}
-            </span>
+          <div className="mt-6 flex flex-wrap items-center justify-between gap-5">
+            <div className="flex flex-wrap items-center gap-5 text-sm text-neutral-500">
+              <span className="inline-flex items-center gap-2">
+                <Clock3 className="h-4 w-4" />
+                {formatDistanceToNow(new Date(announcement.created_at), { addSuffix: true })}
+              </span>
+            </div>
+            {announcement.registration_link && (
+              <a
+                href={announcement.registration_link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-white text-black px-5 py-2 text-xs font-bold uppercase tracking-widest hover:bg-neutral-200 transition-colors border border-white"
+              >
+                <span>Register Now</span>
+                <ExternalLink className="h-3.5 w-3.5" />
+              </a>
+            )}
           </div>
         </div>
       ))}
