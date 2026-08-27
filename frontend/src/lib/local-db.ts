@@ -66,7 +66,13 @@ export const broadcastChannel = typeof window !== 'undefined' && 'BroadcastChann
 
 export const localDb = {
   getClubConfig(): ClubConfig {
-    return loadFromStorage<ClubConfig>(STORAGE_KEYS.CLUB, INITIAL_CLUB_CONFIG)
+    const config = loadFromStorage<ClubConfig>(STORAGE_KEYS.CLUB, INITIAL_CLUB_CONFIG)
+    if (config.description && config.description.includes('We are the official robotics club of GBPIET')) {
+      config.description = INITIAL_CLUB_CONFIG.description
+      config.logo_url = INITIAL_CLUB_CONFIG.logo_url
+      saveToStorage(STORAGE_KEYS.CLUB, config)
+    }
+    return config
   },
 
   getTeamMembers(): TeamMember[] {

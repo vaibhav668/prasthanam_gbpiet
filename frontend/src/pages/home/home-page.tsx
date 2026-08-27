@@ -364,8 +364,8 @@ function HomeShell({ data }: { data: HomepageData }) {
       <header className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-[#1a1a1a]">
         <div className="mx-auto max-w-7xl px-6 py-5 lg:px-10 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <div className="flex h-10 w-10 items-center justify-center bg-white shadow-sm">
-              <span className="text-xl font-black text-black select-none font-ginto-nord">P</span>
+            <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded bg-black border border-[#222]">
+              <img src="/new-logo.png" alt="Prasthanam Logo" className="h-full w-full object-contain" />
             </div>
             <div>
               <p className="text-base font-extrabold font-ginto-nord uppercase tracking-tight text-white">{data.club.name}</p>
@@ -401,14 +401,14 @@ function HomeShell({ data }: { data: HomepageData }) {
       <div className="relative pt-36 pb-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <section className="max-w-4xl text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#111] border border-[#222] text-[11px] font-bold uppercase tracking-widest text-neutral-400 mb-8">
-              <Bot className="w-3.5 h-3.5 text-white" /> GBPIET Official Robotics Chapter
-            </div>
             <h1 className="text-5xl font-black font-ginto-nord uppercase tracking-tighter text-white sm:text-7xl lg:text-8xl leading-[0.9]">
-              BUILD. CODE.<br className="hidden sm:block" /> COMPETE.
+              THINK. BUILD.<br className="hidden sm:block" /> CONQUER.
             </h1>
             <p className="mt-8 max-w-2xl text-lg sm:text-xl leading-relaxed text-neutral-400">
               {data.club.description}
+            </p>
+            <p className="mt-4 max-w-2xl text-base sm:text-lg italic text-neutral-500 font-medium">
+              &ldquo;From imagination to innovation, our journey continues.&rdquo;
             </p>
             <div className="mt-12 flex flex-col gap-4 sm:flex-row justify-center lg:justify-start">
               <a href="#achievements" className="inline-flex justify-center items-center h-14 bg-white text-black px-10 font-bold uppercase tracking-widest hover:bg-neutral-200 transition-colors">
@@ -514,8 +514,8 @@ function HomeShell({ data }: { data: HomepageData }) {
       <footer className="bg-[#0A0A0A] mt-20 border-t border-[#1a1a1a]">
         <div className="mx-auto flex max-w-7xl flex-col gap-8 px-6 py-16 lg:flex-row lg:items-center lg:justify-between lg:px-10">
           <div className="flex items-center gap-6">
-            <div className="flex h-16 w-16 items-center justify-center bg-white text-black font-ginto-nord shadow-sm">
-              <span className="text-3xl font-black select-none">P</span>
+            <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded bg-black border border-[#222]">
+              <img src="/new-logo.png" alt="Prasthanam Logo" className="h-full w-full object-contain" />
             </div>
             <div>
               <p className="text-2xl font-black font-ginto-nord uppercase tracking-tighter text-white">{data.club.name}</p>

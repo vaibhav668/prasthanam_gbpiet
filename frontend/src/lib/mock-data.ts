@@ -57,8 +57,8 @@ export const INITIAL_CLUB_CONFIG: ClubConfig = {
   id: 1,
   name: 'Prasthanam',
   tagline: 'The Robotics Club of GBPIET',
-  description: "We are the official robotics club of GBPIET. We design, fabricate, program, and battle cutting-edge robots—from combat bots and autonomous rovers to quadcopters and embedded IoT automation.",
-  logo_url: '/Devign logo v1 pngV.png',
+  description: "Prasthanam Robotics Club, founded in 2022, is more than a robotics community—it's a journey of ambition, innovation, and perseverance. Every robot built, every challenge overcome, and every achievement earned reflects the dedication of our students. United by curiosity and driven by excellence, we continue to learn, create, and lead the way toward a smarter future.",
+  logo_url: '/new-logo.png',
   hero_image_url: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1200&auto=format&fit=crop&q=80',
   social_links: {
     github: 'https://github.com/prasthanam-gbpiet',
