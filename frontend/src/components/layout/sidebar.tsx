@@ -90,8 +90,8 @@ export function Sidebar({
           collapsed ? 'justify-center' : 'gap-3',
         )}
       >
-        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-sm font-black text-primary-foreground shadow-sm font-ginto-nord">
-          P
+        <div className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl bg-black border border-border/70 shadow-sm">
+          <img src="/new-logo.png" alt="Prasthanam Logo" className="h-full w-full object-contain" />
         </div>
         {!collapsed && (
           <div className="min-w-0">
