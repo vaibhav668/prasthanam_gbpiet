@@ -246,7 +246,7 @@ export const INITIAL_TEAM: TeamMember[] = [
     name: 'Aman Malik',
     role: 'Third Year',
     bio: 'Robotics community member and technical contributor.',
-    avatar_url: '',
+    avatar_url: '/aman.jpg',
     social_links: {
       github: 'https://github.com',
       linkedin: 'https://linkedin.com',
