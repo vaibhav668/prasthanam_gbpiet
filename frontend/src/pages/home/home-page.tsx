@@ -163,7 +163,7 @@ function TeamGrid({ team }: { team: TeamMember[] }) {
 function EventList({ events }: { events: Event[] }) {
   return (
     <div className="space-y-4">
-      {events.slice(0, 4).map((event) => {
+      {events.map((event) => {
         const eventDate = new Date(event.date)
         return (
           <div key={event.id} className="bg-[#0A0A0A] p-6 hover:bg-[#111111] transition-colors flex flex-col md:flex-row gap-6 border border-[#161616]">
@@ -183,12 +183,12 @@ function EventList({ events }: { events: Event[] }) {
                 </span>
               </div>
               <h3 className="mt-4 text-xl font-bold font-ginto-nord tracking-tight text-white">{event.title}</h3>
-              <p className="mt-2 line-clamp-2 text-base leading-relaxed text-neutral-400">{event.description}</p>
+              <p className="mt-2 text-base leading-relaxed text-neutral-400">{event.description}</p>
               <div className="mt-5 flex flex-wrap items-center justify-between gap-5">
                 <div className="flex flex-wrap items-center gap-5 text-sm text-neutral-500">
                   <span className="inline-flex items-center gap-2">
                     <CalendarDays className="h-4 w-4" />
-                    {format(eventDate, 'EEE, MMM d')}
+                    {format(eventDate, 'EEE, MMM d, yyyy')}
                   </span>
                   <span className="inline-flex items-center gap-2">
                     <Clock3 className="h-4 w-4" />
@@ -369,7 +369,7 @@ function HomeShell({ data }: { data: HomepageData }) {
           </div>
           <div className="hidden items-center gap-8 md:flex">
             <a href="#team" className="text-sm font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Members</a>
-            <a href="#events" className="text-sm font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Events</a>
+            <a href="#events" className="text-sm font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Events and Workshops</a>
             <a href="#achievements" className="text-sm font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Achievements</a>
             <a href="#reports" className="text-sm font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Reports</a>
             <a href="#updates" className="text-sm font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Updates</a>
@@ -384,7 +384,7 @@ function HomeShell({ data }: { data: HomepageData }) {
         {mobileMenuOpen && (
           <div className="md:hidden bg-black/95 backdrop-blur-md px-6 py-6 flex flex-col gap-6 border-t border-neutral-900 absolute top-full left-0 right-0 shadow-2xl z-50">
             <a href="#team" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Members</a>
-            <a href="#events" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Events</a>
+            <a href="#events" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Events and Workshops</a>
             <a href="#achievements" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Achievements</a>
             <a href="#reports" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Reports</a>
             <a href="#updates" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Updates</a>
@@ -411,7 +411,7 @@ function HomeShell({ data }: { data: HomepageData }) {
                 <ArrowRight className="ml-3 h-5 w-5" />
               </a>
               <a href="#events" className="inline-flex justify-center items-center h-14 bg-[#111] text-white px-8 font-bold uppercase tracking-widest hover:bg-[#1a1a1a] transition-colors border border-[#222]">
-                Upcoming Events
+                Events and Workshops
               </a>
             </div>
           </section>
@@ -467,8 +467,8 @@ function HomeShell({ data }: { data: HomepageData }) {
         {/* Events Section */}
         <section id="events" className="grid gap-12 lg:grid-cols-[300px_minmax(0,1fr)] scroll-mt-32">
           <div className="space-y-4">
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500 block">Competitions & Camps</span>
-            <h2 className="text-5xl font-black font-ginto-nord uppercase tracking-tighter text-white">Events</h2>
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500 block"></span>
+            <h2 className="text-5xl font-black font-ginto-nord uppercase tracking-tighter text-white">Events and Workshops</h2>
           </div>
           <EventList events={data.events} />
         </section>
