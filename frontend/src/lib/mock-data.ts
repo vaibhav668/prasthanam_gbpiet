@@ -78,7 +78,7 @@ export const INITIAL_TEAM: TeamMember[] = [
     name: 'Uday Pant',
     role: 'Final Year',
     bio: 'Specializing in robotics system architecture, embedded controls, and autonomous navigation.',
-    avatar_url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80',
+    avatar_url: '/uday.jpg',
     social_links: {
       github: 'https://github.com',
       linkedin: 'https://linkedin.com',
@@ -92,7 +92,7 @@ export const INITIAL_TEAM: TeamMember[] = [
     name: 'Pranjul',
     role: 'Final Year',
     bio: 'Combat robotics design, structural fabrication, CAD modeling, and high-torque drivetrain systems.',
-    avatar_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80',
+    avatar_url: '/member2.jpg',
     social_links: {
       github: 'https://github.com',
       linkedin: 'https://linkedin.com',
@@ -106,7 +106,7 @@ export const INITIAL_TEAM: TeamMember[] = [
     name: 'Vaibhav Pokhriyal',
     role: 'Third Year',
     bio: 'Embedded systems development, ROS2 navigation, microcontrollers, and autonomous rover locomotion.',
-    avatar_url: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop&q=80',
+    avatar_url: '/vaibhav.jpg',
     social_links: {
       github: 'https://github.com',
       linkedin: 'https://linkedin.com',
@@ -120,7 +120,7 @@ export const INITIAL_TEAM: TeamMember[] = [
     name: 'Rahul Joshi',
     role: 'Third Year',
     bio: 'Embedded firmware programming, sensor interfacing, and hardware circuit prototyping.',
-    avatar_url: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&auto=format&fit=crop&q=80',
+    avatar_url: '',
     social_links: {
       github: 'https://github.com',
       linkedin: 'https://linkedin.com',
@@ -134,7 +134,7 @@ export const INITIAL_TEAM: TeamMember[] = [
     name: 'Priyanshu Shah',
     role: 'Third Year',
     bio: 'CAD modeling, 3D printing, chassis mechanics, and combat bot arena testing.',
-    avatar_url: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&auto=format&fit=crop&q=80',
+    avatar_url: '',
     social_links: {
       github: 'https://github.com',
       linkedin: 'https://linkedin.com',
@@ -148,7 +148,7 @@ export const INITIAL_TEAM: TeamMember[] = [
     name: 'Ayush Dilwan',
     role: 'Third Year',
     bio: 'Power distribution boards, brushless motor ESCs, and wireless telemetry communication.',
-    avatar_url: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&auto=format&fit=crop&q=80',
+    avatar_url: '/ayush.jpg',
     social_links: {
       github: 'https://github.com',
       linkedin: 'https://linkedin.com',
@@ -162,7 +162,7 @@ export const INITIAL_TEAM: TeamMember[] = [
     name: 'Adarsh',
     role: 'Third Year',
     bio: 'Autonomous path planning, line followers, obstacle avoidance, and sensor fusion algorithms.',
-    avatar_url: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=400&auto=format&fit=crop&q=80',
+    avatar_url: '',
     social_links: {
       github: 'https://github.com',
       linkedin: 'https://linkedin.com',
@@ -176,7 +176,7 @@ export const INITIAL_TEAM: TeamMember[] = [
     name: 'Yash Saini',
     role: 'Third Year',
     bio: 'Computer vision, OpenCV object tracking, and robotic manipulator kinematics.',
-    avatar_url: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400&auto=format&fit=crop&q=80',
+    avatar_url: '',
     social_links: {
       github: 'https://github.com',
       linkedin: 'https://linkedin.com',
@@ -190,7 +190,7 @@ export const INITIAL_TEAM: TeamMember[] = [
     name: 'Priyanshu Nautiyal',
     role: 'Third Year',
     bio: 'Drone flight dynamics, PX4 autopilot controllers, and aerial telemetry systems.',
-    avatar_url: 'https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=400&auto=format&fit=crop&q=80',
+    avatar_url: '/priyanshu_n.jpg',
     social_links: {
       github: 'https://github.com',
       linkedin: 'https://linkedin.com',
@@ -204,7 +204,7 @@ export const INITIAL_TEAM: TeamMember[] = [
     name: 'Priya Maurya',
     role: 'Third Year',
     bio: 'IoT automation, embedded logic, and event coordination for club robotics workshops.',
-    avatar_url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&auto=format&fit=crop&q=80',
+    avatar_url: '/priya.jpg',
     social_links: {
       github: 'https://github.com',
       linkedin: 'https://linkedin.com',
@@ -218,7 +218,7 @@ export const INITIAL_TEAM: TeamMember[] = [
     name: 'Khushi Arya',
     role: 'Third Year',
     bio: 'Circuit schematic design, microcontroller programming, and technical project documentation.',
-    avatar_url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80',
+    avatar_url: '',
     social_links: {
       github: 'https://github.com',
       linkedin: 'https://linkedin.com',
@@ -232,7 +232,7 @@ export const INITIAL_TEAM: TeamMember[] = [
     name: 'Rishika',
     role: 'Third Year',
     bio: 'Robotics community initiatives, hackathon technical prep, and embedded problem solving.',
-    avatar_url: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&auto=format&fit=crop&q=80',
+    avatar_url: '/rishika.jpg',
     social_links: {
       github: 'https://github.com',
       linkedin: 'https://linkedin.com',
