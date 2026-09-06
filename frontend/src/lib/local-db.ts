@@ -29,7 +29,7 @@ const STORAGE_KEYS = {
   TEAM: 'prasthanam_team_members_v12',
   EVENTS: 'prasthanam_events_v2',
   ACHIEVEMENTS: 'prasthanam_achievements',
-  ANNOUNCEMENTS: 'prasthanam_announcements_v2',
+  ANNOUNCEMENTS: 'prasthanam_announcements',
   THREADS: 'prasthanam_threads',
   CHATROOMS: 'prasthanam_chatrooms',
   CHAT_MESSAGES: 'prasthanam_chat_messages',
@@ -66,13 +66,7 @@ export const broadcastChannel = typeof window !== 'undefined' && 'BroadcastChann
 
 export const localDb = {
   getClubConfig(): ClubConfig {
-    const config = loadFromStorage<ClubConfig>(STORAGE_KEYS.CLUB, INITIAL_CLUB_CONFIG)
-    if (config.description && config.description.includes('We are the official robotics club of GBPIET')) {
-      config.description = INITIAL_CLUB_CONFIG.description
-      config.logo_url = INITIAL_CLUB_CONFIG.logo_url
-      saveToStorage(STORAGE_KEYS.CLUB, config)
-    }
-    return config
+    return loadFromStorage<ClubConfig>(STORAGE_KEYS.CLUB, INITIAL_CLUB_CONFIG)
   },
 
   getTeamMembers(): TeamMember[] {
@@ -80,7 +74,12 @@ export const localDb = {
   },
 
   getEvents(): Event[] {
-    return loadFromStorage<Event[]>(STORAGE_KEYS.EVENTS, INITIAL_EVENTS)
+    const events = loadFromStorage<Event[]>(STORAGE_KEYS.EVENTS, INITIAL_EVENTS)
+    if (!Array.isArray(events) || events.length < INITIAL_EVENTS.length || !events.some((e) => e.title.includes('Arduino'))) {
+      saveToStorage(STORAGE_KEYS.EVENTS, INITIAL_EVENTS)
+      return INITIAL_EVENTS
+    }
+    return events
   },
 
   getAchievements(): Achievement[] {
