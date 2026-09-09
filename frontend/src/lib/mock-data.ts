@@ -162,7 +162,7 @@ export const INITIAL_TEAM: TeamMember[] = [
     name: 'Aadarsh Kumar',
     role: 'Third Year',
     bio: 'Autonomous path planning, line followers, obstacle avoidance, and sensor fusion algorithms.',
-    avatar_url: '',
+    avatar_url: '/aadarsh.jpg',
     social_links: {
       github: 'https://github.com',
       linkedin: 'https://linkedin.com',
