@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ComputerVision Workshop - Event Report | Prasthanam GBPIET</title>
+    <style>
+        :root {
+            --bg-color: #0A0A0A;
+            --card-bg: #111111;
+            --border-color: #222222;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A1A1AA;
+            --accent-color: #FFFFFF;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-color);
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem;
+        }
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+        }
+        a:hover {
+            opacity: 0.8;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            padding: 0.6rem 1.2rem;
+            border: 1px solid var(--border-color);
+            background: #141414;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .back-link:hover {
+            background: #222;
+            color: #fff;
+        }
+        .header {
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+        }
+        .badge {
+            display: inline-block;
+            background: #1e1e1e;
+            color: #d4d4d8;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.35rem 0.75rem;
+            border: 1px solid #333;
+            margin-bottom: 1rem;
+        }
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 1.25rem;
+            margin-top: 1rem;
+        }
+        .meta-item {
+            font-size: 0.875rem;
+        }
+        .meta-label {
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.25rem;
+            font-weight: 700;
+        }
+        .meta-value {
+            font-weight: 600;
+            color: #f4f4f5;
+        }
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+        }
+        .btn-primary {
+            background: #ffffff;
+            color: #000000;
+        }
+        .btn-primary:hover {
+            background: #e4e4e7;
+        }
+        .btn-secondary {
+            background: #18181b;
+            color: #ffffff;
+            border: 1px solid var(--border-color);
+        }
+        .btn-secondary:hover {
+            background: #27272a;
+        }
+        .section-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 1.75rem;
+            margin-bottom: 2rem;
+        }
+        .section-card h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            border-bottom: 1px solid #222;
+            padding-bottom: 0.5rem;
+        }
+        .section-card p {
+            color: #d4d4d8;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+        .section-card p:last-child {
+            margin-bottom: 0;
+        }
+        .pipeline-box {
+            background: #18181b;
+            border: 1px solid #27272a;
+            padding: 1rem;
+            font-weight: 700;
+            text-align: center;
+            color: #e4e4e7;
+            margin: 1.25rem 0;
+            font-size: 0.9rem;
+            letter-spacing: 0.03em;
+        }
+        .steps-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            background: #141414;
+            border: 1px solid #222;
+            padding: 0.85rem 1rem;
+            margin-bottom: 0.6rem;
+            font-size: 0.9rem;
+            color: #d4d4d8;
+        }
+        .step-num {
+            background: #27272a;
+            color: #fff;
+            font-weight: 800;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+        }
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .tech-card {
+            background: #18181b;
+            border: 1px solid #27272a;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .tech-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #ffffff;
+            border-bottom: 1px solid #2a2a2a;
+            padding-bottom: 0.4rem;
+        }
+        .tech-body {
+            font-size: 0.85rem;
+            color: #a1a1aa;
+            line-height: 1.6;
+        }
+        .pdf-viewer-container {
+            margin-top: 2rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+        }
+        .pdf-viewer-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        .pdf-frame {
+            width: 100%;
+            height: 700px;
+            border: 1px solid #333;
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+    <a href="/reports/events/" class="back-link">&larr; Back to Events</a>
+
+    <header class="header">
+        <span class="badge">Official Event Report</span>
+        <h1>ComputerVision Workshop</h1>
+        <div class="meta-grid">
+            <div class="meta-item">
+                <div class="meta-label">Topic</div>
+                <div class="meta-value">Computer Vision Based Hardware Control</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Event Type</div>
+                <div class="meta-value">Advanced Technical Workshop</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Organized By</div>
+                <div class="meta-value">Prasthanam Robotics Club</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Core Stack</div>
+                <div class="meta-value">OpenCV, Python, Arduino &amp; ESP32</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="action-buttons">
+        <a href="/reports/computervision-workshop.pdf" download="REPORT_computervision_workshop.pdf" class="btn btn-primary">
+            Download PDF Report
+        </a>
+        <a href="/reports/computervision-workshop.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+            Open PDF in Full Screen &rarr;
+        </a>
+    </div>
+
+    <main>
+        <section class="section-card">
+            <h2>Overview: Computer Vision Based Hardware Control</h2>
+            <p>
+                <strong>Computer Vision Based Hardware Control</strong> is an intelligent cyber-physical system where a video camera detects an object, hand gesture, color, or real-time motion and transforms that visual sensory data into actuation signals to control physical hardware including motors, servos, LEDs, or autonomous robotic systems.
+            </p>
+
+            <div class="pipeline-box">
+                Camera &rarr; Image Processing &rarr; Detection &rarr; Decision &rarr; Hardware Control
+            </div>
+
+            <ul class="steps-list">
+                <li class="step-item">
+                    <span class="step-num">1</span>
+                    <div><strong>Video Capture:</strong> Optical camera stream is continuously captured in real-time.</div>
+                </li>
+                <li class="step-item">
+                    <span class="step-num">2</span>
+                    <div><strong>Image Processing:</strong> OpenCV and Python algorithms filter, transform, and analyze frames.</div>
+                </li>
+                <li class="step-item">
+                    <span class="step-num">3</span>
+                    <div><strong>Feature Detection:</strong> The system identifies key targets—such as hand gestures, specific colors, faces, or moving objects.</div>
+                </li>
+                <li class="step-item">
+                    <span class="step-num">4</span>
+                    <div><strong>Decision Engine:</strong> Based on the geometric or positional detection, a specific control command is generated.</div>
+                </li>
+                <li class="step-item">
+                    <span class="step-num">5</span>
+                    <div><strong>Microcontroller Reception:</strong> Arduino / ESP32 receives the processed command over serial or wireless channels.</div>
+                </li>
+                <li class="step-item">
+                    <span class="step-num">6</span>
+                    <div><strong>Hardware Actuation:</strong> Actuators respond dynamically by driving DC motors, adjusting servo positions, or activating indicators.</div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="section-card">
+            <h2>Core Technologies &amp; Hardware Control Stack</h2>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <span class="tech-title">1. OpenCV (Vision Engine)</span>
+                    <span class="tech-body">
+                        &bull; Object &amp; Color detection<br>
+                        &bull; Face &amp; Landmark recognition<br>
+                        &bull; Hand / Finger gesture tracking<br>
+                        &bull; Motion &amp; Shape analysis
+                    </span>
+                </div>
+                <div class="tech-card">
+                    <span class="tech-title">2. Arduino / ESP32</span>
+                    <span class="tech-body">
+                        Acts as the hardware controller that bridges host computer intelligence with physical circuitry to operate actuators and sensors in real time.
+                    </span>
+                </div>
+                <div class="tech-card">
+                    <span class="tech-title">3. Motors &amp; Servos</span>
+                    <span class="tech-body">
+                        &bull; DC Motors &rarr; Robotic wheel locomotion<br>
+                        &bull; Servo Motors &rarr; Articulated robotic arms<br>
+                        &bull; Stepper Motors &rarr; Sub-millimeter precision positioning
+                    </span>
+                </div>
+                <div class="tech-card">
+                    <span class="tech-title">4. Communication Channels</span>
+                    <span class="tech-body">
+                        High-speed data transport between host vision processor and microcontroller via <strong>USB/Serial</strong>, <strong>Bluetooth</strong>, and <strong>Wi-Fi</strong>.
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <section class="pdf-viewer-container">
+            <div class="pdf-viewer-header">
+                <h2>Embedded PDF Document</h2>
+                <a href="/reports/computervision-workshop.pdf" target="_blank" rel="noopener noreferrer" style="font-size: 0.85rem; color: #a1a1aa; text-decoration: underline;">Open direct link</a>
+            </div>
+            <iframe class="pdf-frame" src="/reports/computervision-workshop.pdf#toolbar=1" title="ComputerVision Workshop PDF Report"></iframe>
+        </section>
+    </main>
+</body>
+</html>

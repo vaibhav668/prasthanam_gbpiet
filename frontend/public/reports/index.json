@@ -1,30 +1,47 @@
 [
   {
-    "title": "TechTalk: Cloud Computing Fundamentals",
-    "description": "An introduction to AWS, Azure, and modern cloud deployment patterns.",
-    "date": "2026-05-10",
-    "slug": "cloud-computing-fundamentals",
-    "url": "/reports/events/cloud-computing-fundamentals/"
+    "title": "DRONE Assembling Workshop",
+    "description": "Multi-day hands-on quadcopter assembly workshop covering structural frame mounting, BLDC brushless motors, Electronic Speed Controllers (ESCs), flight controllers, power systems, and avionics.",
+    "date": "2026-04-25",
+    "slug": "drone-workshop",
+    "url": "/reports/drone-workshop.pdf",
+    "htmlUrl": "/reports/events/drone-workshop/",
+    "downloadName": "REPORT_drone_assembling_workshop.pdf"
   },
   {
-    "title": "Cybersecurity 101: Web App Vulnerabilities",
-    "description": "Understanding common web exploits like XSS and SQL Injection, and how to prevent them.",
-    "date": "2026-04-15",
-    "slug": "cybersecurity-101-web-vulns",
-    "url": "/reports/events/cybersecurity-101-web-vulns/"
+    "title": "ComputerVision Workshop",
+    "description": "Computer vision-based hardware control pipeline integrating OpenCV/Python with Arduino & ESP32 for real-time gesture, color, and object detection driving motors, servos, and robotic mechanisms.",
+    "date": "2026-04-20",
+    "slug": "computervision-workshop",
+    "url": "/reports/computervision-workshop.pdf",
+    "htmlUrl": "/reports/events/computervision-workshop/",
+    "downloadName": "REPORT_computervision_workshop.pdf"
   },
   {
-    "title": "System Design: Scaling to 1M Users",
-    "description": "A deep dive into distributed systems, load balancing, and database scaling techniques.",
-    "date": "2026-03-22",
-    "slug": "system-design-scaling",
-    "url": "/reports/events/system-design-scaling/"
+    "title": "Microcontrollers & Coding Basics Workshop",
+    "description": "Comprehensive hands-on training covering Arduino UNO & Raspberry Pi hardware architecture, GPIO interfacing, sensor integration (ultrasonic, optical, displays), and embedded C/C++ programming with live breadboard prototyping.",
+    "date": "2026-04-14",
+    "slug": "microcontrollers-coding-basics",
+    "url": "/reports/microcontrollers-coding-basics.pdf",
+    "htmlUrl": "/reports/events/microcontrollers-coding-basics/",
+    "downloadName": "REPORT_14th_april_2026_microcontrollers_coding_basics.pdf"
   },
   {
-    "title": "Intro to Machine Learning Models",
-    "description": "Exploring basic ML algorithms, regression, and classification using scikit-learn.",
-    "date": "2026-02-10",
-    "slug": "intro-to-ml-models",
-    "url": "/reports/events/intro-to-ml-models/"
+    "title": "Tinkercad Workshop",
+    "description": "Hands-on workshop introducing 3D design, electronics, Arduino programming, and circuit simulation using Tinkercad, followed by a Circuit Designing & Simulation event.",
+    "date": "2026-03-27",
+    "slug": "tinkercad-workshop",
+    "url": "/reports/tinkercad-workshop.pdf",
+    "htmlUrl": "/reports/events/tinkercad-workshop/",
+    "downloadName": "REPORT_27th_march_2k26_tinkercad_workshop.pdf"
+  },
+  {
+    "title": "SQL Practice Session",
+    "description": "Hands-on SQL practice session covering ER diagrams, database architecture, DDL & DML commands organized by IEEE Student Branch at EED Seminar Hall.",
+    "date": "2026-03-27",
+    "slug": "sql-practice-session",
+    "url": "/reports/sql-practice-session.pdf",
+    "htmlUrl": "/reports/events/sql-practice-session/",
+    "downloadName": "REPORT_27th_march_2k26_sql_practice.pdf"
   }
 ]
