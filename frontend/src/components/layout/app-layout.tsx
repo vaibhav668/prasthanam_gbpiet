@@ -131,15 +131,6 @@ export function AppLayout({ children, className }: { children?: React.ReactNode;
                   >
                     Switch Profile
                   </button>
-                  <button 
-                    className="w-full text-left px-4 py-2 text-sm text-red-400 hover:text-red-300 hover:bg-[#222] font-semibold transition-colors" 
-                    onClick={() => {
-                      setUserDropdownOpen(false);
-                      handleLogout();
-                    }}
-                  >
-                    Sign Out
-                  </button>
                 </div>
               )}
             </div>
@@ -165,8 +156,8 @@ export function AuthLayout({ children, className }: { children: React.ReactNode;
     >
       <div className="w-full max-w-md">
         <div className="mb-6 flex flex-col items-center gap-4">
-          <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded bg-black border border-neutral-800 shadow-lg">
-            <img src="/new-logo.png" alt="Prasthanam Logo" className="h-full w-full object-contain" />
+          <div className="flex h-16 w-16 items-center justify-center bg-white text-black shadow-lg">
+            <span className="text-3xl font-black select-none font-ginto-nord">P</span>
           </div>
           <span className="text-xl font-black tracking-tighter font-ginto-nord text-white uppercase">Prasthanam</span>
         </div>

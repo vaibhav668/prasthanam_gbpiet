@@ -14,7 +14,9 @@ import {
   Megaphone,
   Menu,
   X,
-  Bot
+  Award,
+  Bot,
+  Zap
 } from 'lucide-react'
 import { format, formatDistanceToNow } from 'date-fns'
 import { useHomepage } from '../../hooks/use-homepage'
@@ -63,7 +65,7 @@ function StatCard({ icon, label, value, helper }: { icon: React.ReactNode, label
 }
 
 function TeamGrid({ team }: { team: TeamMember[] }) {
-  const featured = team
+  const featured = team.slice(0, 6)
   const [focusElement, setFocusElement] = useState(0)
 
   if (!featured || featured.length === 0) {
@@ -113,8 +115,8 @@ function TeamGrid({ team }: { team: TeamMember[] }) {
             images={images}
             setFocusElement={setFocusElement}
             carouselRadius={180}
-            peripheralImageRadius={32}
-            centralImageRadius={65}
+            peripheralImageRadius={40}
+            centralImageRadius={70}
             focusElementStyling={{border: 'none', boxShadow: '0 0 40px rgba(255,255,255,0.1)'}}
             autoRotateTime={0}
             transitionTime={0.8}
@@ -122,32 +124,35 @@ function TeamGrid({ team }: { team: TeamMember[] }) {
         </div>
       </div>
 
-      <div className="w-full md:w-1/2 flex justify-center md:justify-start">
+      <div className="w-full md:w-1/2">
         {activeMember && (
-          <div className="w-full max-w-md bg-[#0A0A0A] p-6 sm:p-8 transition-all duration-300 shadow-2xl border border-[#161616]">
-            <div className="flex flex-col gap-5">
-              <div className="flex items-center gap-5">
-                <Avatar className="size-16 sm:size-20 rounded-none bg-black border border-[#222]">
+          <div className="bg-[#0A0A0A] p-10 transition-all duration-300 shadow-2xl border border-[#161616]">
+            <div className="flex flex-col gap-6">
+              <div className="flex items-center gap-6 pb-6 border-b border-[#1a1a1a]">
+                <Avatar className="size-20 rounded-none bg-black border border-[#222]">
                   <AvatarImage src={resolveAssetUrl(activeMember.avatar_url)} alt={activeMember.name} />
                   <AvatarFallback className="rounded-none bg-black text-white font-black">{activeMember.name.charAt(0).toUpperCase()}</AvatarFallback>
                 </Avatar>
                 <div>
-                  <h3 className="text-2xl sm:text-3xl font-black font-ginto-nord uppercase tracking-tight text-white">{activeMember.name}</h3>
-                  <p className="mt-1 text-base sm:text-lg font-medium text-neutral-400">{activeMember.role}</p>
+                  <h3 className="text-3xl font-black font-ginto-nord uppercase tracking-tight text-white">{activeMember.name}</h3>
+                  <p className="mt-1 text-lg font-medium text-neutral-400">{activeMember.role}</p>
                 </div>
               </div>
+              <p className="text-lg leading-relaxed text-neutral-300 whitespace-pre-wrap">
+                {activeMember.bio}
+              </p>
               {Object.entries(socials).length > 0 && (
-                <div className="pt-4 border-t border-[#1a1a1a] flex flex-wrap items-center gap-3">
+                <div className="mt-6 flex flex-wrap items-center gap-4">
                   {Object.entries(socials).map(([platform, url]) => (
                     <a
                       key={platform}
                       href={url as string}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 bg-[#111111] px-4 py-2 text-xs sm:text-sm font-medium text-white transition-all hover:bg-white hover:text-black border border-[#222]"
+                      className="inline-flex items-center gap-2 bg-[#111111] px-5 py-2.5 text-sm font-medium text-white transition-all hover:bg-white hover:text-black border border-[#222]"
                     >
                       <span>{socialLabel(platform)}</span>
-                      <ExternalLink className="h-3.5 w-3.5" />
+                      <ExternalLink className="h-4 w-4" />
                     </a>
                   ))}
                 </div>
@@ -163,7 +168,7 @@ function TeamGrid({ team }: { team: TeamMember[] }) {
 function EventList({ events }: { events: Event[] }) {
   return (
     <div className="space-y-4">
-      {events.map((event) => {
+      {events.slice(0, 4).map((event) => {
         const eventDate = new Date(event.date)
         return (
           <div key={event.id} className="bg-[#0A0A0A] p-6 hover:bg-[#111111] transition-colors flex flex-col md:flex-row gap-6 border border-[#161616]">
@@ -183,34 +188,21 @@ function EventList({ events }: { events: Event[] }) {
                 </span>
               </div>
               <h3 className="mt-4 text-xl font-bold font-ginto-nord tracking-tight text-white">{event.title}</h3>
-              <p className="mt-2 text-base leading-relaxed text-neutral-400">{event.description}</p>
-              <div className="mt-5 flex flex-wrap items-center justify-between gap-5">
-                <div className="flex flex-wrap items-center gap-5 text-sm text-neutral-500">
+              <p className="mt-2 line-clamp-2 text-base leading-relaxed text-neutral-400">{event.description}</p>
+              <div className="mt-5 flex flex-wrap items-center gap-5 text-sm text-neutral-500">
+                <span className="inline-flex items-center gap-2">
+                  <CalendarDays className="h-4 w-4" />
+                  {format(eventDate, 'EEE, MMM d')}
+                </span>
+                <span className="inline-flex items-center gap-2">
+                  <Clock3 className="h-4 w-4" />
+                  {format(eventDate, 'h:mm a')}
+                </span>
+                {event.location && (
                   <span className="inline-flex items-center gap-2">
-                    <CalendarDays className="h-4 w-4" />
-                    {format(eventDate, 'EEE, MMM d, yyyy')}
+                    <Hash className="h-4 w-4" />
+                    {event.location}
                   </span>
-                  <span className="inline-flex items-center gap-2">
-                    <Clock3 className="h-4 w-4" />
-                    {format(eventDate, 'h:mm a')}
-                  </span>
-                  {event.location && (
-                    <span className="inline-flex items-center gap-2">
-                      <Hash className="h-4 w-4" />
-                      {event.location}
-                    </span>
-                  )}
-                </div>
-                {event.registration_link && (
-                  <a
-                    href={event.registration_link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 bg-white text-black px-5 py-2 text-xs font-bold uppercase tracking-widest hover:bg-neutral-200 transition-colors border border-white"
-                  >
-                    <span>Register Now</span>
-                    <ExternalLink className="h-3.5 w-3.5" />
-                  </a>
                 )}
               </div>
             </div>
@@ -266,40 +258,46 @@ function AchievementsList({ achievements }: { achievements: Achievement[] }) {
 }
 
 function AnnouncementList({ announcements }: { announcements: Announcement[] }) {
+  if (!announcements || announcements.length === 0) {
+    return (
+      <div className="border border-[#161616] bg-[#0A0A0A] p-12 text-center">
+        <Megaphone className="mx-auto h-8 w-8 text-neutral-600 mb-4" />
+        <p className="text-base font-bold text-neutral-400 uppercase tracking-widest">No active bulletins</p>
+      </div>
+    )
+  }
+
   return (
     <div className="space-y-4">
       {announcements.slice(0, 4).map((announcement) => (
         <div key={announcement.id} className="bg-[#0A0A0A] p-8 hover:bg-[#111111] transition-colors border border-[#161616]">
           <div className="flex items-start justify-between gap-4">
             <div className="space-y-4">
+              <div className="flex flex-wrap items-center gap-3">
+                {announcement.is_pinned && (
+                  <span className="bg-white text-black px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em]">
+                    Pinned
+                  </span>
+                )}
+                <span className="bg-[#111111] text-white px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] border border-[#222]">
+                  {announcement.priority}
+                </span>
+              </div>
               <div>
-                <h3 className="text-xl font-bold font-ginto-nord tracking-tight text-white">
-                  {stripEmojis(announcement.title)}
-                </h3>
-                <p className="mt-3 text-base leading-relaxed text-neutral-400">
-                  {stripEmojis(announcement.content)}
-                </p>
+                <h3 className="text-xl font-bold font-ginto-nord tracking-tight text-white">{stripEmojis(announcement.title)}</h3>
+                <p className="mt-3 text-base leading-relaxed text-neutral-400">{stripEmojis(announcement.content)}</p>
               </div>
             </div>
           </div>
-          <div className="mt-6 flex flex-wrap items-center justify-between gap-5">
-            <div className="flex flex-wrap items-center gap-5 text-sm text-neutral-500">
-              <span className="inline-flex items-center gap-2">
-                <Clock3 className="h-4 w-4" />
-                {formatDistanceToNow(new Date(announcement.created_at), { addSuffix: true })}
-              </span>
-            </div>
-            {announcement.registration_link && (
-              <a
-                href={announcement.registration_link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-white text-black px-5 py-2 text-xs font-bold uppercase tracking-widest hover:bg-neutral-200 transition-colors border border-white"
-              >
-                <span>Register Now</span>
-                <ExternalLink className="h-3.5 w-3.5" />
-              </a>
-            )}
+          <div className="mt-6 flex flex-wrap items-center gap-5 text-sm text-neutral-500">
+            <span className="inline-flex items-center gap-2">
+              <Users className="h-4 w-4" />
+              {announcement.author?.name || announcement.author?.username || 'Prasthanam Core'}
+            </span>
+            <span className="inline-flex items-center gap-2">
+              <Clock3 className="h-4 w-4" />
+              {formatDistanceToNow(new Date(announcement.created_at), { addSuffix: true })}
+            </span>
           </div>
         </div>
       ))}
@@ -308,7 +306,53 @@ function AnnouncementList({ announcements }: { announcements: Announcement[] }) 
 }
 
 function ReportsList() {
-  const [reports, setReports] = useState<Report[]>([])
+  const [reports, setReports] = useState<Report[]>([
+    {
+      title: 'DRONE Assembling Workshop',
+      description: 'Multi-day hands-on quadcopter assembly workshop covering structural frame mounting, BLDC brushless motors, Electronic Speed Controllers (ESCs), flight controllers, power systems, and avionics.',
+      date: '2026-04-25',
+      slug: 'drone-workshop',
+      url: '/reports/drone-workshop.pdf',
+      htmlUrl: '/reports/events/drone-workshop/',
+      downloadName: 'REPORT_drone_assembling_workshop.pdf'
+    },
+    {
+      title: 'ComputerVision Workshop',
+      description: 'Computer vision-based hardware control pipeline integrating OpenCV/Python with Arduino & ESP32 for real-time gesture, color, and object detection driving motors, servos, and robotic mechanisms.',
+      date: '2026-04-20',
+      slug: 'computervision-workshop',
+      url: '/reports/computervision-workshop.pdf',
+      htmlUrl: '/reports/events/computervision-workshop/',
+      downloadName: 'REPORT_computervision_workshop.pdf'
+    },
+    {
+      title: 'Microcontrollers & Coding Basics Workshop',
+      description: 'Comprehensive hands-on training covering Arduino UNO & Raspberry Pi hardware architecture, GPIO interfacing, sensor integration (ultrasonic, optical, displays), and embedded C/C++ programming with live breadboard prototyping.',
+      date: '2026-04-14',
+      slug: 'microcontrollers-coding-basics',
+      url: '/reports/microcontrollers-coding-basics.pdf',
+      htmlUrl: '/reports/events/microcontrollers-coding-basics/',
+      downloadName: 'REPORT_14th_april_2026_microcontrollers_coding_basics.pdf'
+    },
+    {
+      title: 'Tinkercad Workshop',
+      description: 'Hands-on workshop introducing 3D design, electronics, Arduino programming, and circuit simulation using Tinkercad, followed by a Circuit Designing & Simulation event.',
+      date: '2026-03-27',
+      slug: 'tinkercad-workshop',
+      url: '/reports/tinkercad-workshop.pdf',
+      htmlUrl: '/reports/events/tinkercad-workshop/',
+      downloadName: 'REPORT_27th_march_2k26_tinkercad_workshop.pdf'
+    },
+    {
+      title: 'SQL Practice Session',
+      description: 'Hands-on SQL practice session covering ER diagrams, database architecture, DDL & DML commands organized by IEEE Student Branch at EED Seminar Hall.',
+      date: '2026-03-27',
+      slug: 'sql-practice-session',
+      url: '/reports/sql-practice-session.pdf',
+      htmlUrl: '/reports/events/sql-practice-session/',
+      downloadName: 'REPORT_27th_march_2k26_sql_practice.pdf'
+    }
+  ])
   
   useEffect(() => {
     fetch('/reports/index.json')
@@ -317,8 +361,10 @@ function ReportsList() {
         return res.json()
       })
       .then(data => {
-        data.sort((a: Report, b: Report) => new Date(b.date).getTime() - new Date(a.date).getTime())
-        setReports(data)
+        if (Array.isArray(data) && data.length > 0) {
+          data.sort((a: Report, b: Report) => new Date(b.date).getTime() - new Date(a.date).getTime())
+          setReports(data)
+        }
       })
       .catch(console.error)
   }, [])
@@ -327,23 +373,45 @@ function ReportsList() {
 
   return (
     <div className="space-y-4">
-      {reports.slice(0, 3).map((report) => (
+      {reports.map((report) => (
         <div key={report.slug} className="bg-[#0A0A0A] p-6 hover:bg-[#111111] transition-colors flex flex-col md:flex-row gap-6 border border-[#161616]">
           <div className="min-w-0 flex-1">
-            <h3 className="text-xl font-bold font-ginto-nord tracking-tight text-white">{report.title}</h3>
+            <a href={report.htmlUrl || `/reports/events/${report.slug}/`} className="hover:underline">
+              <h3 className="text-xl font-bold font-ginto-nord tracking-tight text-white">{report.title}</h3>
+            </a>
             <div className="mt-2 text-sm text-neutral-500 font-bold uppercase tracking-widest">
               {format(new Date(report.date), 'MMMM d, yyyy')}
             </div>
             <p className="mt-3 text-base leading-relaxed text-neutral-400">{report.description}</p>
-            <a href={report.url} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-white hover:text-neutral-300">
-              Read Report <ArrowRight className="h-4 w-4" />
-            </a>
+            <div className="mt-4 flex flex-wrap items-center gap-3">
+              <a href={report.htmlUrl || `/reports/events/${report.slug}/`} className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-white hover:text-neutral-300">
+                Read Report <ArrowRight className="h-4 w-4" />
+              </a>
+              <a href={report.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-white transition-colors border border-[#444] px-3 py-1.5 bg-[#1a1a1a] hover:bg-[#2a2a2a]">
+                <ExternalLink className="h-3.5 w-3.5" /> Open PDF
+              </a>
+              <a href={report.url} download={report.downloadName || `REPORT_${report.slug.replace(/-/g, '_')}.pdf`} className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-neutral-400 hover:text-white transition-colors border border-[#333] px-3 py-1.5 bg-[#141414]">
+                Download PDF
+              </a>
+            </div>
           </div>
         </div>
       ))}
-      <div className="pt-4">
-        <a href="/reports/events/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center w-full bg-[#111111] text-white px-6 py-4 font-bold uppercase tracking-widest text-sm hover:bg-white hover:text-black transition-colors border border-[#222]">
-          View All Past Events
+      <div className="pt-4 flex flex-wrap gap-3">
+        <a href="/reports/events/drone-workshop/" className="inline-flex items-center justify-center flex-1 min-w-[140px] bg-[#111111] text-white px-3 py-3.5 font-bold uppercase tracking-widest text-[11px] sm:text-xs hover:bg-white hover:text-black transition-colors border border-[#222] text-center">
+          DRONE Workshop
+        </a>
+        <a href="/reports/events/computervision-workshop/" className="inline-flex items-center justify-center flex-1 min-w-[140px] bg-[#111111] text-white px-3 py-3.5 font-bold uppercase tracking-widest text-[11px] sm:text-xs hover:bg-white hover:text-black transition-colors border border-[#222] text-center">
+          ComputerVision
+        </a>
+        <a href="/reports/events/microcontrollers-coding-basics/" className="inline-flex items-center justify-center flex-1 min-w-[140px] bg-[#111111] text-white px-3 py-3.5 font-bold uppercase tracking-widest text-[11px] sm:text-xs hover:bg-white hover:text-black transition-colors border border-[#222] text-center">
+          Microcontrollers
+        </a>
+        <a href="/reports/events/tinkercad-workshop/" className="inline-flex items-center justify-center flex-1 min-w-[140px] bg-[#111111] text-white px-3 py-3.5 font-bold uppercase tracking-widest text-[11px] sm:text-xs hover:bg-white hover:text-black transition-colors border border-[#222] text-center">
+          Tinkercad
+        </a>
+        <a href="/reports/events/sql-practice-session/" className="inline-flex items-center justify-center flex-1 min-w-[140px] bg-[#111111] text-white px-3 py-3.5 font-bold uppercase tracking-widest text-[11px] sm:text-xs hover:bg-white hover:text-black transition-colors border border-[#222] text-center">
+          SQL Practice
         </a>
       </div>
     </div>
@@ -359,8 +427,8 @@ function HomeShell({ data }: { data: HomepageData }) {
       <header className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-[#1a1a1a]">
         <div className="mx-auto max-w-7xl px-6 py-5 lg:px-10 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded bg-black border border-[#222]">
-              <img src="/new-logo.png" alt="Prasthanam Logo" className="h-full w-full object-contain" />
+            <div className="flex h-10 w-10 items-center justify-center bg-white shadow-sm">
+              <span className="text-xl font-black text-black select-none font-ginto-nord">P</span>
             </div>
             <div>
               <p className="text-base font-extrabold font-ginto-nord uppercase tracking-tight text-white">{data.club.name}</p>
@@ -368,8 +436,8 @@ function HomeShell({ data }: { data: HomepageData }) {
             </div>
           </div>
           <div className="hidden items-center gap-8 md:flex">
-            <a href="#team" className="text-sm font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Members</a>
-            <a href="#events" className="text-sm font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Events and Workshops</a>
+            <a href="#team" className="text-sm font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Team</a>
+            <a href="#events" className="text-sm font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Events</a>
             <a href="#achievements" className="text-sm font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Achievements</a>
             <a href="#reports" className="text-sm font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Reports</a>
             <a href="#updates" className="text-sm font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Updates</a>
@@ -383,8 +451,8 @@ function HomeShell({ data }: { data: HomepageData }) {
         
         {mobileMenuOpen && (
           <div className="md:hidden bg-black/95 backdrop-blur-md px-6 py-6 flex flex-col gap-6 border-t border-neutral-900 absolute top-full left-0 right-0 shadow-2xl z-50">
-            <a href="#team" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Members</a>
-            <a href="#events" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Events and Workshops</a>
+            <a href="#team" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Team</a>
+            <a href="#events" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Events</a>
             <a href="#achievements" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Achievements</a>
             <a href="#reports" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Reports</a>
             <a href="#updates" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Updates</a>
@@ -396,14 +464,14 @@ function HomeShell({ data }: { data: HomepageData }) {
       <div className="relative pt-36 pb-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <section className="max-w-4xl text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#111] border border-[#222] text-[11px] font-bold uppercase tracking-widest text-neutral-400 mb-8">
+              <Bot className="w-3.5 h-3.5 text-white" /> GBPIET Official Robotics Chapter
+            </div>
             <h1 className="text-5xl font-black font-ginto-nord uppercase tracking-tighter text-white sm:text-7xl lg:text-8xl leading-[0.9]">
-              THINK. BUILD.<br className="hidden sm:block" /> CONQUER.
+              BUILD. CODE.<br className="hidden sm:block" /> COMPETE.
             </h1>
             <p className="mt-8 max-w-2xl text-lg sm:text-xl leading-relaxed text-neutral-400">
               {data.club.description}
-            </p>
-            <p className="mt-4 max-w-2xl text-base sm:text-lg italic text-neutral-500 font-medium">
-              &ldquo;From imagination to innovation, our journey continues.&rdquo;
             </p>
             <div className="mt-12 flex flex-col gap-4 sm:flex-row justify-center lg:justify-start">
               <a href="#achievements" className="inline-flex justify-center items-center h-14 bg-white text-black px-10 font-bold uppercase tracking-widest hover:bg-neutral-200 transition-colors">
@@ -411,7 +479,7 @@ function HomeShell({ data }: { data: HomepageData }) {
                 <ArrowRight className="ml-3 h-5 w-5" />
               </a>
               <a href="#events" className="inline-flex justify-center items-center h-14 bg-[#111] text-white px-8 font-bold uppercase tracking-widest hover:bg-[#1a1a1a] transition-colors border border-[#222]">
-                Events and Workshops
+                Upcoming Events
               </a>
             </div>
           </section>
@@ -439,7 +507,7 @@ function HomeShell({ data }: { data: HomepageData }) {
             </p>
           </div>
           <div className="w-full md:w-96 bg-black p-8 border border-[#222]">
-            <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500 mb-6">Club Members</h4>
+            <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500 mb-6">Core Leadership</h4>
             <div className="flex items-center justify-between gap-4">
               <AvatarGroup>
                 {data.team.slice(0, 4).map((member) => (
@@ -450,7 +518,7 @@ function HomeShell({ data }: { data: HomepageData }) {
                 ))}
               </AvatarGroup>
               <span className="text-xs font-black text-black bg-white px-3 py-1.5 uppercase tracking-widest">
-                {data.team.length} Members
+                {data.team.length} Leads
               </span>
             </div>
           </div>
@@ -459,7 +527,8 @@ function HomeShell({ data }: { data: HomepageData }) {
         {/* Team Section */}
         <section id="team" className="space-y-12 scroll-mt-32">
           <div className="space-y-4 max-w-2xl">
-            <h2 className="text-5xl font-black font-ginto-nord uppercase tracking-tighter text-white">Club Members</h2>
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500 block">Leadership</span>
+            <h2 className="text-5xl font-black font-ginto-nord uppercase tracking-tighter text-white">The Robotics Core</h2>
           </div>
           <TeamGrid team={data.team} />
         </section>
@@ -467,8 +536,8 @@ function HomeShell({ data }: { data: HomepageData }) {
         {/* Events Section */}
         <section id="events" className="grid gap-12 lg:grid-cols-[300px_minmax(0,1fr)] scroll-mt-32">
           <div className="space-y-4">
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500 block"></span>
-            <h2 className="text-5xl font-black font-ginto-nord uppercase tracking-tighter text-white">Events and Workshops</h2>
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500 block">Competitions & Camps</span>
+            <h2 className="text-5xl font-black font-ginto-nord uppercase tracking-tighter text-white">Events</h2>
           </div>
           <EventList events={data.events} />
         </section>
@@ -508,8 +577,8 @@ function HomeShell({ data }: { data: HomepageData }) {
       <footer className="bg-[#0A0A0A] mt-20 border-t border-[#1a1a1a]">
         <div className="mx-auto flex max-w-7xl flex-col gap-8 px-6 py-16 lg:flex-row lg:items-center lg:justify-between lg:px-10">
           <div className="flex items-center gap-6">
-            <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded bg-black border border-[#222]">
-              <img src="/new-logo.png" alt="Prasthanam Logo" className="h-full w-full object-contain" />
+            <div className="flex h-16 w-16 items-center justify-center bg-white text-black font-ginto-nord shadow-sm">
+              <span className="text-3xl font-black select-none">P</span>
             </div>
             <div>
               <p className="text-2xl font-black font-ginto-nord uppercase tracking-tighter text-white">{data.club.name}</p>
