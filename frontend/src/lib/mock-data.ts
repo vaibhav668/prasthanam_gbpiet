@@ -176,7 +176,7 @@ export const INITIAL_TEAM: TeamMember[] = [
     name: 'Yash Saini',
     role: 'Third Year',
     bio: 'Computer vision, OpenCV object tracking, and robotic manipulator kinematics.',
-    avatar_url: '/yash.png',
+    avatar_url: '',
     social_links: {
       github: 'https://github.com',
       linkedin: 'https://linkedin.com',
