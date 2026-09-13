@@ -1,6 +1,8 @@
 import {
   INITIAL_CLUB_CONFIG,
   INITIAL_TEAM,
+  INITIAL_ALUMNI,
+  INITIAL_ALUMNI_VIDEO,
   INITIAL_EVENTS,
   INITIAL_ACHIEVEMENTS,
   INITIAL_ANNOUNCEMENTS,
@@ -12,6 +14,8 @@ import {
 import type {
   ClubConfig,
   TeamMember,
+  AlumniMember,
+  AlumniVideoSpotlight,
   Event,
   Announcement,
   Achievement,
@@ -27,6 +31,8 @@ import type {
 const STORAGE_KEYS = {
   CLUB: 'prasthanam_club_config',
   TEAM: 'prasthanam_team_members_v12',
+  ALUMNI: 'prasthanam_alumni_members_v4',
+  ALUMNI_VIDEO: 'prasthanam_alumni_video_v4',
   EVENTS: 'prasthanam_events_v2',
   ACHIEVEMENTS: 'prasthanam_achievements',
   ANNOUNCEMENTS: 'prasthanam_announcements',
@@ -71,6 +77,14 @@ export const localDb = {
 
   getTeamMembers(): TeamMember[] {
     return INITIAL_TEAM
+  },
+
+  getAlumni(): AlumniMember[] {
+    return loadFromStorage<AlumniMember[]>(STORAGE_KEYS.ALUMNI, INITIAL_ALUMNI)
+  },
+
+  getAlumniVideo(): AlumniVideoSpotlight {
+    return loadFromStorage<AlumniVideoSpotlight>(STORAGE_KEYS.ALUMNI_VIDEO, INITIAL_ALUMNI_VIDEO)
   },
 
   getEvents(): Event[] {
@@ -119,6 +133,8 @@ export const localDb = {
   getHomepageBundle(): HomepageData {
     const club = this.getClubConfig()
     const team = this.getTeamMembers().filter((t) => t.is_active)
+    const alumni = this.getAlumni()
+    const alumni_video = this.getAlumniVideo()
     const events = this.getEvents().filter((e) => e.status === 'upcoming' || e.status === 'ongoing')
     const achievements = this.getAchievements()
     const announcements = this.getAnnouncements()
@@ -129,6 +145,8 @@ export const localDb = {
     return {
       club,
       team,
+      alumni,
+      alumni_video,
       events,
       achievements,
       announcements,

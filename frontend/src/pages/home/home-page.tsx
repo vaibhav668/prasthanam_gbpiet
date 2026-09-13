@@ -20,6 +20,7 @@ import { format, formatDistanceToNow } from 'date-fns'
 import { useHomepage } from '../../hooks/use-homepage'
 import { resolveAssetUrl } from '../../lib/utils'
 import { Avatar, AvatarImage, AvatarFallback, AvatarGroup } from '../../components/ui/avatar'
+import { AlumniSection } from '../../components/home/alumni-section'
 import type { Announcement, Event, Achievement, HomepageData, TeamMember } from '../../types/api'
 
 interface Report {
@@ -378,6 +379,7 @@ function HomeShell({ data }: { data: HomepageData }) {
             <a href="#achievements" className="text-sm font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Achievements</a>
             <a href="#reports" className="text-sm font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Reports</a>
             <a href="#updates" className="text-sm font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Updates</a>
+            <a href="#alumni" className="text-sm font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Alumni</a>
           </div>
           <div className="md:hidden">
             <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="text-white p-2">
@@ -393,6 +395,7 @@ function HomeShell({ data }: { data: HomepageData }) {
             <a href="#achievements" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Achievements</a>
             <a href="#reports" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Reports</a>
             <a href="#updates" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Updates</a>
+            <a href="#alumni" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Alumni</a>
           </div>
         )}
       </header>
@@ -469,6 +472,7 @@ function HomeShell({ data }: { data: HomepageData }) {
           <TeamGrid team={data.team} />
         </section>
 
+
         {/* Events Section */}
         <section id="events" className="grid gap-12 lg:grid-cols-[300px_minmax(0,1fr)] scroll-mt-32">
           <div className="space-y-4">
@@ -499,6 +503,7 @@ function HomeShell({ data }: { data: HomepageData }) {
           <ReportsList />
         </section>
 
+
         {/* Bulletins & Updates Section */}
         <section id="updates" className="grid gap-12 lg:grid-cols-[300px_minmax(0,1fr)] scroll-mt-32">
           <div className="space-y-4">
@@ -507,6 +512,9 @@ function HomeShell({ data }: { data: HomepageData }) {
           </div>
           <AnnouncementList announcements={data.announcements} />
         </section>
+
+        {/* Alumni Section */}
+        <AlumniSection alumni={data.alumni || []} video={data.alumni_video} />
       </main>
 
       {/* Footer */}

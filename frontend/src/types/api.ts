@@ -164,6 +164,37 @@ export interface Announcement {
   updated_at: string
 }
 
+export interface AlumniMember {
+  id: number
+  name: string
+  batch: string
+  graduation_year: number
+  degree_branch: string
+  former_role: string
+  current_role: string
+  company_or_institution: string
+  location?: string
+  avatar_url: string
+  bio_quote: string
+  key_contributions: string[]
+  social_links: Record<string, string> | string
+  featured?: boolean
+  display_order?: number
+}
+
+export interface AlumniVideoSpotlight {
+  id: number
+  title: string
+  speaker_name: string
+  speaker_role: string
+  speaker_batch: string
+  video_url: string
+  thumbnail_url: string
+  duration: string
+  description: string
+  highlights?: string[]
+}
+
 export interface HomepageStats {
   total_members: number
   total_threads: number
@@ -174,6 +205,8 @@ export interface HomepageStats {
 export interface HomepageData {
   club: ClubConfig
   team: TeamMember[]
+  alumni: AlumniMember[]
+  alumni_video?: AlumniVideoSpotlight
   events: Event[]
   achievements: Achievement[]
   announcements: Announcement[]

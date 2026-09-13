@@ -1,6 +1,8 @@
 import type {
   ClubConfig,
   TeamMember,
+  AlumniMember,
+  AlumniVideoSpotlight,
   Event,
   Announcement,
   Achievement,
@@ -242,6 +244,114 @@ export const INITIAL_TEAM: TeamMember[] = [
     created_at: new Date(Date.now() - 1000 * 60 * 60 * 24 * 120).toISOString(),
   },
 ]
+
+export const INITIAL_ALUMNI: AlumniMember[] = [
+  {
+    id: 1,
+    name: 'Gyanendra Yadav',
+    batch: 'Batch of 2025',
+    graduation_year: 2025,
+    degree_branch: 'B.Tech EE',
+    former_role: 'Club Founder',
+    current_role: 'Robotics Engineer',
+    company_or_institution: 'HRL',
+    location: 'Mumbai, Maharashtra',
+    avatar_url: '/alumni/gyanendra-yadav.jpg',
+    bio_quote: 'Prasthanam taught me that hands-on experimentation beats theory every time. Build boldly and never stop learning.',
+    key_contributions: [
+      'Led autonomous SLAM & navigation for next-gen rovers',
+      'Mentored juniors in ROS2 and embedded firmware',
+      'Spearheaded national robotics competition team representing GBPIET',
+    ],
+    social_links: {
+      linkedin: 'https://www.linkedin.com/in/imgyanendrasingh?utm_source=share_via&utm_content=profile&utm_medium=member_android',
+    },
+    featured: true,
+    display_order: 1,
+  },
+  {
+    id: 2,
+    name: 'Arvind Singh Rawat',
+    batch: 'Batch of 2025',
+    graduation_year: 2025,
+    degree_branch: 'B.Tech EE',
+    former_role: 'Vice Club Founder',
+    current_role: 'Hardware & Embedded Engineer',
+    company_or_institution: 'Robotics & Embedded Systems',
+    location: 'Dehradun, India',
+    avatar_url: '/alumni/arvind-singh-rawat.jpg',
+    bio_quote: 'From burning late night oil over microcontrollers to building competition-grade combat robots, Prasthanam provided the ultimate launchpad.',
+    key_contributions: [
+      'Spearheaded embedded architecture and custom circuit designs for combat bots',
+      'Led hands-on microcontrollers and PCB fabrication workshops for junior batches',
+      'Represented GBPIET in inter-college robotics symposiums',
+    ],
+    social_links: {
+      linkedin: 'https://www.linkedin.com/in/imrawatarvind?utm_source=share_via&utm_content=profile&utm_medium=member_ios',
+    },
+    featured: true,
+    display_order: 2,
+  },
+  {
+    id: 3,
+    name: 'Ashmit Rana',
+    batch: 'Batch of 2026',
+    graduation_year: 2026,
+    degree_branch: 'B.Tech EE',
+    former_role: 'Club President 2025',
+    current_role: 'Robotics & UAV Systems Engineer',
+    company_or_institution: 'Aerial Dynamics & Robotics',
+    location: 'Uttarakhand, India',
+    avatar_url: '/alumni/ashmit-rana.jpg',
+    bio_quote: 'Flying autonomous drones and mastering flight dynamics at Prasthanam transformed engineering concepts into high-octane reality.',
+    key_contributions: [
+      'Configured and piloted autonomous multi-rotor UAV systems and RC telemetry',
+      'Led GBPIET aerial robotics flight testing and aeromodelling showcases',
+      'Mentored members in brushless drone propulsion and electronic speed controllers',
+    ],
+    social_links: {
+      linkedin: 'https://www.linkedin.com/in/ashmit-rana101?utm_source=share_via&utm_content=profile&utm_medium=member_ios',
+    },
+    featured: true,
+    display_order: 3,
+  },
+  {
+    id: 4,
+    name: 'Harsh Singh',
+    batch: 'Batch of 2026',
+    graduation_year: 2026,
+    degree_branch: 'B.Tech EE',
+    former_role: 'Technical Head',
+    current_role: 'Robotics & AI Software Engineer',
+    company_or_institution: 'Intelligent Autonomous Systems',
+    location: 'India',
+    avatar_url: '/alumni/harsh-singh.jpg',
+    bio_quote: 'Building ROS computer vision pipelines and sensor fusion algorithms at Prasthanam shaped how I solve complex real-world challenges.',
+    key_contributions: [
+      'Engineered computer vision pipelines and path planning algorithms for rovers',
+      'Organized club hackathons, technical bootcamps, and codebase architectures',
+      'Mentored juniors in ROS2 navigation stack and autonomous systems development',
+    ],
+    social_links: {
+      linkedin: 'https://www.linkedin.com/in/harshsinghengr?utm_source=share_via&utm_content=profile&utm_medium=member_ios',
+    },
+    featured: true,
+    display_order: 4,
+  },
+]
+
+export const INITIAL_ALUMNI_VIDEO: AlumniVideoSpotlight = {
+  id: 1,
+  title: 'From GBPIET Robotics Lab to Industry Pioneer',
+  speaker_name: 'Gyanendra Yadav',
+  speaker_role: 'Club Founder (Batch of 2025) • Robotics Engineer @ HRL',
+  speaker_batch: 'Batch of 2025',
+  video_url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+  thumbnail_url: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1200&auto=format&fit=crop&q=80',
+  duration: '05:42',
+  description: 'In this special video address recorded for Prasthanam members, Gyanendra Yadav reflects on our robotics journey from foundational hardware to national arenas, sharing key advice for current students on mastering hardware design, ROS2, and launching careers in cutting-edge robotics.',
+  highlights: [],
+}
 
 export const INITIAL_EVENTS: Event[] = [
   {
