@@ -108,8 +108,8 @@ export const INITIAL_TEAM: TeamMember[] = [
     bio: 'Embedded systems development, ROS2 navigation, microcontrollers, and autonomous rover locomotion.',
     avatar_url: '/vaibhav.jpg',
     social_links: {
-      github: 'https://github.com',
-      linkedin: 'https://linkedin.com',
+      github: 'https://github.com/vaibhav668',
+      linkedin: 'https://www.linkedin.com/in/vaibhav-pokhriyal-a8b08023a/',
     },
     display_order: 3,
     is_active: true,
@@ -120,7 +120,7 @@ export const INITIAL_TEAM: TeamMember[] = [
     name: 'Rahul Joshi',
     role: 'Third Year',
     bio: 'Embedded firmware programming, sensor interfacing, and hardware circuit prototyping.',
-    avatar_url: '',
+    avatar_url: '/rahul.png',
     social_links: {
       github: 'https://github.com',
       linkedin: 'https://linkedin.com',
@@ -134,9 +134,9 @@ export const INITIAL_TEAM: TeamMember[] = [
     name: 'Priyanshu Shah',
     role: 'Third Year',
     bio: 'CAD modeling, 3D printing, chassis mechanics, and combat bot arena testing.',
-    avatar_url: '',
+    avatar_url: '/priyanshuShah.png',
     social_links: {
-      github: 'https://github.com',
+      github: 'https://github.com/Priyanshuofficial1',
       linkedin: 'https://linkedin.com',
     },
     display_order: 5,
@@ -212,20 +212,6 @@ export const INITIAL_TEAM: TeamMember[] = [
     display_order: 10,
     is_active: true,
     created_at: new Date(Date.now() - 1000 * 60 * 60 * 24 * 160).toISOString(),
-  },
-  {
-    id: 11,
-    name: 'Khushi Arya',
-    role: 'Third Year',
-    bio: 'Circuit schematic design, microcontroller programming, and technical project documentation.',
-    avatar_url: '',
-    social_links: {
-      github: 'https://github.com',
-      linkedin: 'https://linkedin.com',
-    },
-    display_order: 11,
-    is_active: true,
-    created_at: new Date(Date.now() - 1000 * 60 * 60 * 24 * 140).toISOString(),
   },
   {
     id: 12,
