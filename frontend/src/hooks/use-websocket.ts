@@ -67,7 +67,7 @@ export function useChatWebSocket({
     setIsConnected(true)
 
     return () => {
-      broadcastChannel.removeEventListener('message', handleBroadcast)
+      broadcastChannel?.removeEventListener('message', handleBroadcast)
     }
   }, [chatroomId])
 
