@@ -117,7 +117,7 @@ export const INITIAL_TEAM: TeamMember[] = [
   },
   {
     id: 4,
-    name: 'Rahul Jo',
+    name: 'Rahul Joshi',
     role: 'Third Year',
     bio: 'Embedded firmware programming, sensor interfacing, and hardware circuit prototyping.',
     avatar_url: '',
