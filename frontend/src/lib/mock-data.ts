@@ -366,7 +366,6 @@ export const INITIAL_ALUMNI_VIDEO: AlumniVideoSpotlight = {
   description: 'In this special video address recorded for Prasthanam members, Gyanendra Yadav reflects on our robotics journey from foundational hardware to national arenas, sharing key advice for current students on mastering hardware design, ROS2, and launching careers in cutting-edge robotics.',
   highlights: [],
 }
-const now = new Date()
 
 export const INITIAL_EVENTS: Event[] = [
   {
