@@ -12,5 +12,3 @@ test_auth.sh
 # /reports/public/
 /reports/bin/hugo*
 /reports/.hugo_build.lock
-.DS_Store
-*.DS_Store

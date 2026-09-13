@@ -26,8 +26,8 @@ import type {
 
 const STORAGE_KEYS = {
   CLUB: 'prasthanam_club_config',
-  TEAM: 'prasthanam_team_members',
-  EVENTS: 'prasthanam_events',
+  TEAM: 'prasthanam_team_members_v12',
+  EVENTS: 'prasthanam_events_v2',
   ACHIEVEMENTS: 'prasthanam_achievements',
   ANNOUNCEMENTS: 'prasthanam_announcements',
   THREADS: 'prasthanam_threads',
@@ -74,7 +74,12 @@ export const localDb = {
   },
 
   getEvents(): Event[] {
-    return loadFromStorage<Event[]>(STORAGE_KEYS.EVENTS, INITIAL_EVENTS)
+    const events = loadFromStorage<Event[]>(STORAGE_KEYS.EVENTS, INITIAL_EVENTS)
+    if (!Array.isArray(events) || events.length < INITIAL_EVENTS.length || !events.some((e) => e.title.includes('Arduino'))) {
+      saveToStorage(STORAGE_KEYS.EVENTS, INITIAL_EVENTS)
+      return INITIAL_EVENTS
+    }
+    return events
   },
 
   getAchievements(): Achievement[] {

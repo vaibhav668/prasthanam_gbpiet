@@ -3,50 +3,25 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>/reports/events/</loc>
-    <lastmod>2026-04-25T00:00:00+00:00</lastmod>
-  </url>
-  <url>
+    <lastmod>2026-05-10T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>/reports/</loc>
-    <lastmod>2026-04-25T00:00:00+00:00</lastmod>
-  </url>
-  <url>
-    <loc>/reports/events/drone-workshop/</loc>
-    <lastmod>2026-04-25T00:00:00+00:00</lastmod>
-  </url>
-  <url>
-    <loc>/reports/drone-workshop.pdf</loc>
-    <lastmod>2026-04-25T00:00:00+00:00</lastmod>
-  </url>
-  <url>
-    <loc>/reports/events/computervision-workshop/</loc>
-    <lastmod>2026-04-20T00:00:00+00:00</lastmod>
-  </url>
-  <url>
-    <loc>/reports/computervision-workshop.pdf</loc>
-    <lastmod>2026-04-20T00:00:00+00:00</lastmod>
-  </url>
-  <url>
-    <loc>/reports/events/microcontrollers-coding-basics/</loc>
-    <lastmod>2026-04-14T00:00:00+00:00</lastmod>
-  </url>
-  <url>
-    <loc>/reports/microcontrollers-coding-basics.pdf</loc>
-    <lastmod>2026-04-14T00:00:00+00:00</lastmod>
-  </url>
-  <url>
-    <loc>/reports/events/tinkercad-workshop/</loc>
-    <lastmod>2026-03-27T00:00:00+00:00</lastmod>
-  </url>
-  <url>
-    <loc>/reports/tinkercad-workshop.pdf</loc>
-    <lastmod>2026-03-27T00:00:00+00:00</lastmod>
-  </url>
-  <url>
-    <loc>/reports/events/sql-practice-session/</loc>
-    <lastmod>2026-03-27T00:00:00+00:00</lastmod>
-  </url>
-  <url>
-    <loc>/reports/sql-practice-session.pdf</loc>
-    <lastmod>2026-03-27T00:00:00+00:00</lastmod>
+    <lastmod>2026-05-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/reports/events/cloud-computing-fundamentals/</loc>
+    <lastmod>2026-05-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/reports/events/cybersecurity-101-web-vulns/</loc>
+    <lastmod>2026-04-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/reports/events/system-design-scaling/</loc>
+    <lastmod>2026-03-22T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/reports/events/intro-to-ml-models/</loc>
+    <lastmod>2026-02-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/reports/categories/</loc>
+  </url><url>
+    <loc>/reports/tags/</loc>
   </url>
 </urlset>
