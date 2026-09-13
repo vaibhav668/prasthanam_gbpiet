@@ -62,6 +62,11 @@ function StatCard({ icon, label, value, helper }: { icon: React.ReactNode, label
   )
 }
 
+function getInitialsAvatar(name: string) {
+  const initial = (name.trim().charAt(0) || 'P').toUpperCase()
+  return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' fill='%23111111' stroke='%23333333' stroke-width='2'/%3E%3Ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' fill='%23ffffff' font-family='sans-serif' font-size='48' font-weight='900'%3E${initial}%3C/text%3E%3C/svg%3E`
+}
+
 function TeamGrid({ team }: { team: TeamMember[] }) {
   const featured = team
   const [focusElement, setFocusElement] = useState(0)
@@ -70,7 +75,7 @@ function TeamGrid({ team }: { team: TeamMember[] }) {
     return <div className="text-neutral-500">No team members to display.</div>
   }
 
-  const images = featured.map(member => resolveAssetUrl(member.avatar_url))
+  const images = featured.map(member => resolveAssetUrl(member.avatar_url) || getInitialsAvatar(member.name))
   const activeMember = featured[focusElement] || featured[0]
   const socials = activeMember ? parseSocialLinks(activeMember.social_links) : {}
 

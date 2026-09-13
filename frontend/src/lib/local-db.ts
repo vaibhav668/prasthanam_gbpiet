@@ -66,33 +66,23 @@ export const broadcastChannel = typeof window !== 'undefined' && 'BroadcastChann
 
 export const localDb = {
   getClubConfig(): ClubConfig {
-    const club = loadFromStorage<ClubConfig>(STORAGE_KEYS.CLUB, INITIAL_CLUB_CONFIG)
-    if (club && (!club.description || club.description.includes('official robotics club of GBPIET'))) {
-      club.description = INITIAL_CLUB_CONFIG.description
-      saveToStorage(STORAGE_KEYS.CLUB, club)
-    }
-    return club
+    return INITIAL_CLUB_CONFIG
   },
 
   getTeamMembers(): TeamMember[] {
-    return loadFromStorage<TeamMember[]>(STORAGE_KEYS.TEAM, INITIAL_TEAM)
+    return INITIAL_TEAM
   },
 
   getEvents(): Event[] {
-    const events = loadFromStorage<Event[]>(STORAGE_KEYS.EVENTS, INITIAL_EVENTS)
-    if (!Array.isArray(events) || events.length < INITIAL_EVENTS.length || !events.some((e) => e.title.includes('Arduino'))) {
-      saveToStorage(STORAGE_KEYS.EVENTS, INITIAL_EVENTS)
-      return INITIAL_EVENTS
-    }
-    return events
+    return INITIAL_EVENTS
   },
 
   getAchievements(): Achievement[] {
-    return loadFromStorage<Achievement[]>(STORAGE_KEYS.ACHIEVEMENTS, INITIAL_ACHIEVEMENTS)
+    return INITIAL_ACHIEVEMENTS
   },
 
   getAnnouncements(): Announcement[] {
-    return loadFromStorage<Announcement[]>(STORAGE_KEYS.ANNOUNCEMENTS, INITIAL_ANNOUNCEMENTS)
+    return INITIAL_ANNOUNCEMENTS
   },
 
   getUsers(): User[] {
